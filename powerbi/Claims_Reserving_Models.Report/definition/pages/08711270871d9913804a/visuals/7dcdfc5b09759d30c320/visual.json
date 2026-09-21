@@ -1,0 +1,93 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "7dcdfc5b09759d30c320",
+  "position": {
+    "x": 22,
+    "y": 440,
+    "z": 2000,
+    "height": 640,
+    "width": 892,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_triangle_cell"
+                    }
+                  },
+                  "Property": "dev_age_months"
+                }
+              },
+              "queryRef": "fct_triangle_cell.dev_age_months",
+              "nativeQueryRef": "dev_age_months",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_rating_group"
+                    }
+                  },
+                  "Property": "rating_group"
+                }
+              },
+              "queryRef": "dim_rating_group.rating_group",
+              "nativeQueryRef": "rating_group"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "% of Ultimate Paid"
+                }
+              },
+              "queryRef": "_measures.% of Ultimate Paid",
+              "nativeQueryRef": "% of Ultimate Paid"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_measures"
+                  }
+                },
+                "Property": "% of Ultimate Paid"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,42 @@
+table assumptions_global
+	lineageTag: 623a8587-83aa-423c-a40b-4c5b55cb7312
+
+	column parameter
+		dataType: string
+		lineageTag: 1d6842f7-1fe3-4fa2-8205-8140d209df35
+		summarizeBy: none
+		sourceColumn: parameter
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: double
+		lineageTag: 1d9396ab-09c3-494a-8b8c-c5d85612f855
+		summarizeBy: none
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column note
+		dataType: string
+		lineageTag: c5766e17-343f-4df9-9116-eff5edfb139c
+		summarizeBy: none
+		sourceColumn: note
+
+		annotation SummarizationSetBy = Automatic
+
+	partition assumptions_global = m
+		mode: import
+		source =
+				let
+				    Conn = PostgresMartsConnection,
+				    Source = PostgreSQL.Database(Conn[Server], Conn[Database], [Query = "SELECT * FROM marts.assumptions_global"])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,9 @@
+handler_id,name,email,role,assigned_rating_group
+H01,Ava Thompson,ava.thompson@example.com,Claims Handler,A
+H02,Liam Carter,liam.carter@example.com,Claims Handler,A
+H03,Sophie Bennett,sophie.bennett@example.com,Claims Handler,B
+H04,Noah Wright,noah.wright@example.com,Claims Handler,B
+H05,Grace Patel,grace.patel@example.com,Claims Handler,C
+H06,Oliver Hughes,oliver.hughes@example.com,Claims Handler,C
+H07,Priya Anand,priya.anand@example.com,Reserving Actuary,
+H08,Marcus Webb,marcus.webb@example.com,Senior Management,

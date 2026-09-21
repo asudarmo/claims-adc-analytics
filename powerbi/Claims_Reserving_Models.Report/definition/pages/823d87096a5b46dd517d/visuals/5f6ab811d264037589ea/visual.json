@@ -1,0 +1,108 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "5f6ab811d264037589ea",
+  "position": {
+    "x": 0,
+    "y": 32.5,
+    "z": 0,
+    "height": 485,
+    "width": 777.5,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_reserve_results"
+                    }
+                  },
+                  "Property": "method"
+                }
+              },
+              "queryRef": "fct_reserve_results.method",
+              "nativeQueryRef": "method",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_rating_group"
+                    }
+                  },
+                  "Property": "rating_group"
+                }
+              },
+              "queryRef": "dim_rating_group.rating_group",
+              "nativeQueryRef": "rating_group"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Ultimate (Base, Promoted)"
+                }
+              },
+              "queryRef": "_measures.Ultimate (Base, Promoted)",
+              "nativeQueryRef": "Ultimate (Base, Promoted)"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_measures"
+                  }
+                },
+                "Property": "Ultimate (Base, Promoted)"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

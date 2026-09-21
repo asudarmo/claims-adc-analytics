@@ -1,0 +1,91 @@
+table dim_date
+	lineageTag: 1a7c4b3e-8f2d-4e6a-9c1b-5d8e7f3a2b6c
+
+	column Date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1a7c4b3e-8f2d-4e6a-9c1b-5d8e7f3a2b6d
+		dataCategory: PaddedDateTableDates
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = User
+
+	column Year = YEAR([Date])
+		dataType: int64
+		formatString: 0
+		lineageTag: 1a7c4b3e-8f2d-4e6a-9c1b-5d8e7f3a2b6e
+		dataCategory: Years
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+	column MonthNo = MONTH([Date])
+		dataType: int64
+		formatString: 0
+		lineageTag: 1a7c4b3e-8f2d-4e6a-9c1b-5d8e7f3a2b6f
+		dataCategory: MonthOfYear
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+	column Month = FORMAT([Date], "MMMM")
+		dataType: string
+		lineageTag: 1a7c4b3e-8f2d-4e6a-9c1b-5d8e7f3a2b70
+		dataCategory: Months
+		summarizeBy: none
+		sortByColumn: MonthNo
+
+		annotation SummarizationSetBy = User
+
+	column QuarterNo = INT(([MonthNo] + 2) / 3)
+		dataType: int64
+		formatString: 0
+		lineageTag: 1a7c4b3e-8f2d-4e6a-9c1b-5d8e7f3a2b71
+		dataCategory: QuarterOfYear
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+	column Quarter = "Qtr " & [QuarterNo]
+		dataType: string
+		lineageTag: 1a7c4b3e-8f2d-4e6a-9c1b-5d8e7f3a2b72
+		dataCategory: Quarters
+		summarizeBy: none
+		sortByColumn: QuarterNo
+
+		annotation SummarizationSetBy = User
+
+	column Day = DAY([Date])
+		dataType: int64
+		formatString: 0
+		lineageTag: 1a7c4b3e-8f2d-4e6a-9c1b-5d8e7f3a2b73
+		dataCategory: DayOfMonth
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+	hierarchy 'Date Hierarchy'
+		lineageTag: 1a7c4b3e-8f2d-4e6a-9c1b-5d8e7f3a2b74
+
+		level Year
+			lineageTag: 1a7c4b3e-8f2d-4e6a-9c1b-5d8e7f3a2b75
+			column: Year
+
+		level Quarter
+			lineageTag: 1a7c4b3e-8f2d-4e6a-9c1b-5d8e7f3a2b76
+			column: Quarter
+
+		level Month
+			lineageTag: 1a7c4b3e-8f2d-4e6a-9c1b-5d8e7f3a2b77
+			column: Month
+
+		level Day
+			lineageTag: 1a7c4b3e-8f2d-4e6a-9c1b-5d8e7f3a2b78
+			column: Day
+
+	partition dim_date = calculated
+		mode: import
+		source = CALENDARAUTO()
+

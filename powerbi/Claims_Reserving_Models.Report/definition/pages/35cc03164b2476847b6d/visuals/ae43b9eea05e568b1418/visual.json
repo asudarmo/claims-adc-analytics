@@ -1,0 +1,107 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "ae43b9eea05e568b1418",
+  "position": {
+    "x": 0,
+    "y": 712,
+    "z": 8000,
+    "height": 368,
+    "width": 576,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "violinPlot4D46EB9EB3A141D9BA2289793175D971",
+    "query": {
+      "queryState": {
+        "measure": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fct_claim"
+                        }
+                      },
+                      "Property": "time_to_settle_days"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(fct_claim.time_to_settle_days)",
+              "nativeQueryRef": "Average of time_to_settle_days"
+            }
+          ]
+        },
+        "sampling": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_claim"
+                    }
+                  },
+                  "Property": "claim_id"
+                }
+              },
+              "queryRef": "fct_claim.claim_id",
+              "nativeQueryRef": "claim_id"
+            }
+          ]
+        },
+        "category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_rating_group"
+                    }
+                  },
+                  "Property": "rating_group"
+                }
+              },
+              "queryRef": "dim_rating_group.rating_group",
+              "nativeQueryRef": "rating_group"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Violin plots of Time-To-Settle by Rating Group'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

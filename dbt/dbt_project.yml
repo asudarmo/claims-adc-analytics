@@ -1,0 +1,26 @@
+name: 'claims_reserving'
+version: '1.0.0'
+config-version: 2
+
+profile: 'claims_reserving'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  claims_reserving:
+    staging:
+      +schema: staging
+      +materialized: view
+    intermediate:
+      +schema: intermediate
+      +materialized: view
+    marts:
+      +schema: marts
+      +materialized: table
+
+seeds:
+  claims_reserving:
+    +schema: marts

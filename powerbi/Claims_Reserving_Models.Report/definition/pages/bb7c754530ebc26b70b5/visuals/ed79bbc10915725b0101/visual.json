@@ -1,0 +1,76 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "ed79bbc10915725b0101",
+  "position": {
+    "x": 0,
+    "y": 732,
+    "z": 4,
+    "height": 348,
+    "width": 642,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_data_quality_exceptions"
+                    }
+                  },
+                  "Property": "source_table"
+                }
+              },
+              "queryRef": "fct_data_quality_exceptions.source_table",
+              "nativeQueryRef": "source_table",
+              "active": true
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_data_quality_exceptions"
+                    }
+                  },
+                  "Property": "rule_name"
+                }
+              },
+              "queryRef": "fct_data_quality_exceptions.rule_name",
+              "nativeQueryRef": "rule_name",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Exception Count"
+                }
+              },
+              "queryRef": "_measures.Exception Count",
+              "nativeQueryRef": "Exception Count"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

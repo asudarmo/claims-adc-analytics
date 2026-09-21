@@ -1,0 +1,113 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "614c505003d9e5e2606a",
+  "position": {
+    "x": 944,
+    "y": 440,
+    "z": 3000,
+    "height": 308,
+    "width": 798,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_triangle_cell"
+                    }
+                  },
+                  "Property": "dev_age_months"
+                }
+              },
+              "queryRef": "fct_triangle_cell.dev_age_months",
+              "nativeQueryRef": "dev_age_months",
+              "active": true
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_accident_year"
+                    }
+                  },
+                  "Property": "accident_year"
+                }
+              },
+              "queryRef": "dim_accident_year.accident_year",
+              "nativeQueryRef": "accident_year",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Ultimate (Base, Promoted)"
+                }
+              },
+              "queryRef": "_measures.Ultimate (Base, Promoted)",
+              "nativeQueryRef": "Ultimate (Base, Promoted)"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "subTotals": [
+        {
+          "properties": {
+            "columnSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "rowSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Ultimate Development Triangle'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

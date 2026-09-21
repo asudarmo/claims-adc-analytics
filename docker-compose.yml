@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: claims_reserving_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-reserving}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-reserving_dev_only}
+      POSTGRES_DB: ${POSTGRES_DB:-claims_reserving}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      # Scripts here run once, in filename order, only against a fresh
+      # (empty) volume. Re-running after schema changes needs `docker
+      # compose down -v` first, or applying the .sql by hand with psql.
+      - ./db/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-reserving} -d ${POSTGRES_DB:-claims_reserving}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pg_data:

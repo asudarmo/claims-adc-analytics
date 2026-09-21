@@ -1,0 +1,66 @@
+table dim_reserving_run
+	lineageTag: e1a23ffe-6fa3-40bf-a4ff-5899ae20f912
+
+	column run_id
+		dataType: string
+		lineageTag: 31acb09b-c923-4e36-a7ca-922be1bb94c4
+		summarizeBy: none
+		sourceColumn: run_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column run_timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8c6a47bb-db43-4eeb-a34c-a2d414afe726
+		summarizeBy: none
+		sourceColumn: run_timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column label
+		dataType: string
+		lineageTag: 08856de0-d487-477e-9388-a160f9203de2
+		summarizeBy: none
+		sourceColumn: label
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_promoted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 19932fea-ce38-42b9-b3b1-d4a3506b24cd
+		summarizeBy: none
+		sourceColumn: is_promoted
+
+		annotation SummarizationSetBy = Automatic
+
+	column invocation_id
+		dataType: string
+		lineageTag: 2b8f4c1a-6d3e-49a7-8f2b-1c5e9a7d3f4b
+		summarizeBy: none
+		sourceColumn: invocation_id
+
+		annotation SummarizationSetBy = User
+
+	column trend_source
+		dataType: string
+		lineageTag: 7e9d2a5c-4f1b-48e6-9a3d-2c8b6f1e5d7a
+		summarizeBy: none
+		sourceColumn: trend_source
+
+		annotation SummarizationSetBy = User
+
+	partition dim_reserving_run = m
+		mode: import
+		source =
+				let
+				    Conn = PostgresMartsConnection,
+				    Source = PostgreSQL.Database(Conn[Server], Conn[Database], [Query = "SELECT * FROM marts.dim_reserving_run"])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

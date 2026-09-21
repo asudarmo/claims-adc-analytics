@@ -1,0 +1,145 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "91f6cf6152a048500771",
+  "position": {
+    "x": 0,
+    "y": 326,
+    "z": 6000,
+    "height": 364,
+    "width": 746,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "hundredPercentStackedColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_rating_group"
+                    }
+                  },
+                  "Property": "rating_group"
+                }
+              },
+              "queryRef": "dim_rating_group.rating_group",
+              "nativeQueryRef": "rating_group",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Open Claims 3-6 Months"
+                }
+              },
+              "queryRef": "_measures.Open Claims 3-6 Months",
+              "nativeQueryRef": "Open Claims 3-6 Months"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Open Claims 6-12 Months"
+                }
+              },
+              "queryRef": "_measures.Open Claims 6-12 Months",
+              "nativeQueryRef": "Open Claims 6-12 Months"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Open Claims 0-3 Months"
+                }
+              },
+              "queryRef": "_measures.Open Claims 0-3 Months",
+              "nativeQueryRef": "Open Claims 0-3 Months"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Open Claims 12+ Months"
+                }
+              },
+              "queryRef": "_measures.Open Claims 12+ Months",
+              "nativeQueryRef": "Open Claims 12+ Months"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_measures"
+                  }
+                },
+                "Property": "Open Claims 3-6 Months"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Open Claims in 3-months buckets'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

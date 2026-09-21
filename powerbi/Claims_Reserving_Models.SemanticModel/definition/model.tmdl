@@ -1,0 +1,35 @@
+model Model
+	culture: en-SG
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-SG
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["PostgresMartsConnection","dim_rating_group","dim_development_age","dim_accident_year","dim_claims_handler","dim_reserving_run","fct_claim","fct_claim_transactions","fct_triangle_cell","fct_premium_rate","fct_data_quality_exceptions","fct_reserve_results","fct_reinsurance_valuation","fct_reserving_run_parameters","assumptions_by_group","assumptions_global"]
+
+annotation PBI_ProTooling = ["DevMode","DaxQueryView_Desktop"]
+
+ref table dim_rating_group
+ref table dim_development_age
+ref table dim_accident_year
+ref table dim_claims_handler
+ref table dim_reserving_run
+ref table fct_claim
+ref table fct_claim_transactions
+ref table fct_triangle_cell
+ref table fct_premium_rate
+ref table fct_data_quality_exceptions
+ref table fct_reserve_results
+ref table fct_reinsurance_valuation
+ref table fct_reserving_run_parameters
+ref table assumptions_by_group
+ref table assumptions_global
+ref table dim_date
+ref table _measures
+
+ref cultureInfo en-SG
+

@@ -1,0 +1,130 @@
+table fct_reinsurance_valuation
+	lineageTag: 08b55a0f-e81f-44af-aef8-8eb953b3c0f0
+
+	column scenario
+		dataType: string
+		lineageTag: a72d1859-68b5-4587-bc10-7df318dfe41b
+		summarizeBy: none
+		sourceColumn: scenario
+
+		annotation SummarizationSetBy = User
+
+	column inflation_shock
+		dataType: double
+		lineageTag: 8d4b8ea5-9258-42de-9e78-368e2b34d3f9
+		summarizeBy: none
+		sourceColumn: inflation_shock
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column stressed_reserve
+		dataType: double
+		lineageTag: 48cd07a9-7481-49a6-b51f-a6daf9504800
+		summarizeBy: none
+		sourceColumn: stressed_reserve
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column booked_reserve
+		dataType: double
+		lineageTag: b73fa87e-c932-4dcb-b004-ccd791f35cac
+		summarizeBy: none
+		sourceColumn: booked_reserve
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column attachment
+		dataType: double
+		lineageTag: 89fb81be-6bd8-4d20-b7e0-73e257a4e8d3
+		summarizeBy: none
+		sourceColumn: attachment
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column exhaustion
+		dataType: double
+		lineageTag: 9ddfedab-39ba-47f7-a86a-54c82ebdfe55
+		summarizeBy: none
+		sourceColumn: exhaustion
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column adc_limit
+		dataType: double
+		lineageTag: 961cade6-bd14-475d-b1e5-488cd7c8b409
+		summarizeBy: none
+		sourceColumn: adc_limit
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column premium
+		dataType: double
+		lineageTag: fcd020d7-b315-4534-a73f-20b876e76bcc
+		summarizeBy: none
+		sourceColumn: premium
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column recovery
+		dataType: double
+		lineageTag: cfff8f77-9b0b-4e2c-88ed-98a3f25e0dca
+		summarizeBy: none
+		sourceColumn: recovery
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column net_benefit
+		dataType: double
+		lineageTag: f974c90a-3af8-4e7b-98fe-dd805cd80e37
+		summarizeBy: none
+		sourceColumn: net_benefit
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column run_id
+		dataType: string
+		lineageTag: b5f9c1ce-e368-4fc3-b4c6-080ce6ed28a2
+		summarizeBy: none
+		sourceColumn: run_id
+
+		annotation SummarizationSetBy = User
+
+	column booked_method
+		dataType: string
+		lineageTag: 3f6a8e2d-9b41-4c7e-8a2f-5d1e7c9b4a6f
+		summarizeBy: none
+		sourceColumn: booked_method
+
+		annotation SummarizationSetBy = User
+
+	partition fct_reinsurance_valuation = m
+		mode: import
+		source =
+				let
+				    Conn = PostgresMartsConnection,
+				    Source = PostgreSQL.Database(Conn[Server], Conn[Database], [Query = "SELECT * FROM marts.fct_reinsurance_valuation"])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

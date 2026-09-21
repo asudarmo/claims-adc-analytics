@@ -1,0 +1,48 @@
+table fct_data_quality_exceptions
+	lineageTag: f8be941d-ec0a-42c4-83eb-edcca17a4c95
+
+	column source_table
+		dataType: string
+		lineageTag: 2d7a01b4-f116-4432-b9fc-d1dc3c98aa05
+		summarizeBy: none
+		sourceColumn: source_table
+
+		annotation SummarizationSetBy = Automatic
+
+	column key
+		dataType: string
+		lineageTag: 75dfa08d-e968-4371-aad8-3d15a18538bf
+		summarizeBy: none
+		sourceColumn: key
+
+		annotation SummarizationSetBy = Automatic
+
+	column rule_name
+		dataType: string
+		lineageTag: 369edb2f-6393-46e1-81ea-a4e1ec56143a
+		summarizeBy: none
+		sourceColumn: rule_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column detail
+		dataType: string
+		lineageTag: 92073a32-0fd6-4cb8-b104-e2228603f66b
+		summarizeBy: none
+		sourceColumn: detail
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fct_data_quality_exceptions = m
+		mode: import
+		source =
+				let
+				    Conn = PostgresMartsConnection,
+				    Source = PostgreSQL.Database(Conn[Server], Conn[Database], [Query = "SELECT * FROM marts.fct_data_quality_exceptions"])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

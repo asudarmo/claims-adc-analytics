@@ -1,0 +1,166 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "ce238fdfb18c90b02004",
+  "position": {
+    "x": 622,
+    "y": 712,
+    "z": 9000,
+    "height": 368,
+    "width": 650,
+    "tabOrder": 9000
+  },
+  "visual": {
+    "visualType": "deneb7E15AEF80B9E4D4F8E12924291ECE89A",
+    "query": {
+      "queryState": {
+        "dataset": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_claim"
+                    }
+                  },
+                  "Property": "time_to_settle_days"
+                }
+              },
+              "queryRef": "Sum(fct_claim.time_to_settle_days)",
+              "nativeQueryRef": "time_to_settle_days"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_rating_group"
+                    }
+                  },
+                  "Property": "rating_group"
+                }
+              },
+              "queryRef": "dim_rating_group.rating_group",
+              "nativeQueryRef": "rating_group"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "fct_claim"
+                      }
+                    },
+                    "Property": "time_to_settle_days"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "vega": [
+        {
+          "properties": {
+            "jsonSpec": {
+              "expr": {
+                "Literal": {
+                  "Value": "'{\r\n  \"data\": {\"name\": \"dataset\"},\r\n  \"transform\": [\r\n    {\"filter\": \"datum.time_to_settle_days != null\"},\r\n    {\r\n      \"density\": \"time_to_settle_days\",\r\n      \"groupby\": [\"rating_group\"],\r\n      \"as\": [\"value\", \"density\"]\r\n    }\r\n  ],\r\n  \"mark\": {\r\n    \"type\": \"area\",\r\n    \"interpolate\": \"monotone\",\r\n    \"fillOpacity\": 0.5,\r\n    \"stroke\": \"white\",\r\n    \"strokeWidth\": 1\r\n  },\r\n  \"width\": 500,\r\n  \"height\": 40,\r\n  \"encoding\": {\r\n    \"x\": {\"field\": \"value\", \"type\": \"quantitative\", \"title\": \"\"},\r\n    \"y\": {\r\n      \"field\": \"density\",\r\n      \"type\": \"quantitative\",\r\n      \"axis\": null,\r\n      \"scale\": {\"range\": [25, -60]}\r\n    },\r\n    \"row\": {\r\n      \"field\": \"rating_group\",\r\n      \"type\": \"nominal\",\r\n      \"title\": null,\r\n      \"spacing\": 0,\r\n      \"header\": {\"labelAngle\": 0, \"labelAlign\": \"left\", \"labelPadding\": 10}\r\n    },\r\n    \"fill\": {\"field\": \"rating_group\", \"type\": \"nominal\", \"legend\": null}\r\n  },\r\n  \"config\": {\r\n    \"view\": {\"stroke\": null},\r\n    \"axis\": {\"domain\": false}\r\n  }\r\n}'"
+                }
+              }
+            },
+            "version": {
+              "expr": {
+                "Literal": {
+                  "Value": "'6.4.3'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "stateManagement": [
+        {
+          "properties": {
+            "supportFieldConfiguration": {
+              "expr": {
+                "Literal": {
+                  "Value": "'{\"time_to_settle_days\":{\"highlight\":false,\"highlightStatus\":false,\"highlightComparator\":false,\"format\":false,\"formatted\":false,\"names\":false}}'"
+                }
+              }
+            },
+            "denebMetaVersion": {
+              "expr": {
+                "Literal": {
+                  "Value": "'2'"
+                }
+              }
+            },
+            "consolidateFieldParameters": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "viewportHeight": {
+              "expr": {
+                "Literal": {
+                  "Value": "300D"
+                }
+              }
+            },
+            "viewportWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "616D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "developer": [
+        {
+          "properties": {
+            "version": {
+              "expr": {
+                "Literal": {
+                  "Value": "'2.0.0.0'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Density of Time-to-Settle (Days)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

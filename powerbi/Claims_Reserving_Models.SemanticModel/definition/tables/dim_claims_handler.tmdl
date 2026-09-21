@@ -1,0 +1,56 @@
+table dim_claims_handler
+	lineageTag: 2403b72b-8df2-46c3-9a75-72235d403381
+
+	column handler_id
+		dataType: string
+		lineageTag: d99c8654-06ef-442f-bfbd-37443f03541c
+		summarizeBy: none
+		sourceColumn: handler_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 34bf6197-f9b2-4cce-86ce-99c1d3edb46e
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		lineageTag: 12990b1d-630d-44f0-a8f9-68bae40151a9
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column role
+		dataType: string
+		lineageTag: 3f850d01-209d-4fa7-a9f5-3c9ed6201562
+		summarizeBy: none
+		sourceColumn: role
+
+		annotation SummarizationSetBy = Automatic
+
+	column assigned_rating_group
+		dataType: string
+		lineageTag: 8a0987b0-68a0-41e3-acae-683ae6cf5c89
+		summarizeBy: none
+		sourceColumn: assigned_rating_group
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_claims_handler = m
+		mode: import
+		source =
+				let
+				    Conn = PostgresMartsConnection,
+				    Source = PostgreSQL.Database(Conn[Server], Conn[Database], [Query = "SELECT * FROM marts.dim_claims_handler"])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

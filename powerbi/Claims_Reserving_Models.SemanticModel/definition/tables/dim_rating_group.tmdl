@@ -1,0 +1,40 @@
+table dim_rating_group
+	lineageTag: 7f5d9acb-72b4-4f71-809b-db2dc4fe77d7
+
+	column rating_group
+		dataType: string
+		lineageTag: 43807040-24f2-4e19-be3c-f08dfcefa649
+		summarizeBy: none
+		sourceColumn: rating_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column label
+		dataType: string
+		lineageTag: b78e2e88-bea1-4c6e-a123-887a57bf4de7
+		summarizeBy: none
+		sourceColumn: label
+
+		annotation SummarizationSetBy = Automatic
+
+	column description
+		dataType: string
+		lineageTag: c57c58b7-142a-4fc3-a9c3-176b02771435
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_rating_group = m
+		mode: import
+		source =
+				let
+				    Conn = PostgresMartsConnection,
+				    Source = PostgreSQL.Database(Conn[Server], Conn[Database], [Query = "SELECT * FROM marts.dim_rating_group"])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

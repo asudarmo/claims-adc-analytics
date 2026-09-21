@@ -1,0 +1,50 @@
+table fct_reserving_run_parameters
+	lineageTag: 7e947ccd-4b2c-4aad-93da-c2363189ea98
+
+	column run_id
+		dataType: string
+		lineageTag: bb3c5f4b-0a75-4a3d-a169-6941a49ed2f1
+		summarizeBy: none
+		sourceColumn: run_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column parameter_name
+		dataType: string
+		lineageTag: 5ecaf929-18b9-4e85-98e1-e0d71c916430
+		summarizeBy: none
+		sourceColumn: parameter_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column rating_group
+		dataType: string
+		lineageTag: edc9c97f-4586-4cc6-861a-8964974ae773
+		summarizeBy: none
+		sourceColumn: rating_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: double
+		lineageTag: a3b2240d-3249-4414-bc5d-905be9e81a4b
+		summarizeBy: none
+		sourceColumn: value
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fct_reserving_run_parameters = m
+		mode: import
+		source =
+				let
+				    Conn = PostgresMartsConnection,
+				    Source = PostgreSQL.Database(Conn[Server], Conn[Database], [Query = "SELECT * FROM marts.fct_reserving_run_parameters"])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

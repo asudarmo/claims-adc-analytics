@@ -1,0 +1,164 @@
+table fct_claim
+	lineageTag: 0fc50f9b-90d6-43f6-bb30-9a4764e4c7c1
+
+	column claim_id
+		dataType: string
+		lineageTag: 49a982c1-0630-4c6f-b427-77d33e77d80a
+		summarizeBy: none
+		sourceColumn: claim_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column rating_group
+		dataType: string
+		lineageTag: fe8a8c78-c3d3-4668-89a7-84b3528f918e
+		summarizeBy: none
+		sourceColumn: rating_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column rating_group_was_missing
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5e65e4d7-e5dc-475d-90b4-e9d7c4bdc12d
+		summarizeBy: none
+		sourceColumn: rating_group_was_missing
+
+		annotation SummarizationSetBy = Automatic
+
+	column accident_year
+		dataType: int64
+		formatString: 0
+		lineageTag: b678a4d7-2312-4b3b-abc5-ac3aff957ee8
+		summarizeBy: none
+		sourceColumn: accident_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column accident_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8d6f0f4f-3bad-40cf-9e92-d8a65ff121a0
+		summarizeBy: none
+		sourceColumn: accident_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column report_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d6d82926-f4cb-464a-a771-a8c5b2109a45
+		summarizeBy: none
+		sourceColumn: report_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column report_date_was_imputed
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: cd365351-97c5-4854-9300-6e70dc146d51
+		summarizeBy: none
+		sourceColumn: report_date_was_imputed
+
+		annotation SummarizationSetBy = Automatic
+
+	column close_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e18ea2bb-fb22-40d9-981e-8f7ae380face
+		summarizeBy: none
+		sourceColumn: close_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 87f44911-1582-4864-a032-75f2ce18d3a4
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column cumulative_paid
+		dataType: double
+		lineageTag: 675325b1-7ef9-4136-93d6-975dc35e7ae4
+		summarizeBy: sum
+		sourceColumn: cumulative_paid
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column payment_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 04695dfb-494b-419d-952f-7c10e4b79df1
+		summarizeBy: sum
+		sourceColumn: payment_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_case_reserve
+		dataType: double
+		lineageTag: 6aa054ca-b44d-4f62-a3f8-593718f58c20
+		summarizeBy: sum
+		sourceColumn: latest_case_reserve
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column dev_age_months_at_valuation
+		dataType: int64
+		formatString: 0
+		lineageTag: 64be08a5-2448-4060-a02a-0d6b2f3f19ca
+		summarizeBy: none
+		sourceColumn: dev_age_months_at_valuation
+
+		annotation SummarizationSetBy = User
+
+	column handler_id
+		dataType: string
+		lineageTag: 5e02575d-5e91-4183-adec-40444846e80d
+		summarizeBy: none
+		sourceColumn: handler_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column time_to_settle_days =
+			
+			IF( fct_claim[status] = "Closed",
+			    DATEDIFF(fct_claim[report_date], fct_claim[close_date], DAY),
+			    BLANK()
+			)
+		formatString: 0
+		lineageTag: 05cb8ccc-6539-4952-af8a-323faf5875b3
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column open_claim_age_days =
+			
+			IF(
+			    fct_claim[status] = "Open",
+			    DATEDIFF(fct_claim[report_date], [Valuation Date], DAY)
+			)
+		formatString: 0
+		lineageTag: d6b7ff0a-a494-496a-90f6-6e84f86e7411
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fct_claim = m
+		mode: import
+		source =
+				let
+				    Conn = PostgresMartsConnection,
+				    Source = PostgreSQL.Database(Conn[Server], Conn[Database], [Query = "SELECT * FROM marts.fct_claim"])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

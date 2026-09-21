@@ -1,0 +1,80 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "738650ca97061b8d3d95",
+  "position": {
+    "x": 1012,
+    "y": 16,
+    "z": 5,
+    "height": 1064,
+    "width": 908,
+    "tabOrder": 5
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_data_quality_exceptions"
+                    }
+                  },
+                  "Property": "source_table"
+                }
+              },
+              "queryRef": "fct_data_quality_exceptions.source_table",
+              "nativeQueryRef": "source_table"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_data_quality_exceptions"
+                    }
+                  },
+                  "Property": "key"
+                }
+              },
+              "queryRef": "fct_data_quality_exceptions.key",
+              "nativeQueryRef": "key"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_data_quality_exceptions"
+                    }
+                  },
+                  "Property": "rule_name"
+                }
+              },
+              "queryRef": "fct_data_quality_exceptions.rule_name",
+              "nativeQueryRef": "rule_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_data_quality_exceptions"
+                    }
+                  },
+                  "Property": "detail"
+                }
+              },
+              "queryRef": "fct_data_quality_exceptions.detail",
+              "nativeQueryRef": "detail"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

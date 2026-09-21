@@ -1,0 +1,365 @@
+table _measures
+	lineageTag: d21ab4f6-9a89-4789-91c4-e2fb95ebe361
+
+	measure 'Total Ultimate Booked' =
+			CALCULATE(
+			    SUM(fct_reserve_results[ultimate]),
+			    FILTER(fct_reserve_results,
+			        fct_reserve_results[scenario] = "Base" &&
+			        fct_reserve_results[method] = "BornhuetterFerguson"
+			    ),
+			    FILTER(dim_reserving_run,
+			        'dim_reserving_run'[is_promoted] = TRUE
+			    )
+			)
+		lineageTag: cc8975dd-377e-4308-89c2-fec44f3ec35e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Promoted Run Label' =
+			CALCULATE(
+			    SELECTEDVALUE(dim_reserving_run[label]),
+			    dim_reserving_run[is_promoted] = TRUE
+			)
+		lineageTag: a1b2c3d4-1111-4a2b-9c3d-4e5f60718293
+
+	measure 'Promoted Run Timestamp' =
+			CALCULATE(
+			    SELECTEDVALUE(dim_reserving_run[run_timestamp]),
+			    dim_reserving_run[is_promoted] = TRUE
+			)
+		lineageTag: a1b2c3d4-2222-4a2b-9c3d-4e5f60718293
+
+	measure 'Total Reserve Booked' =
+			CALCULATE(
+			    SUM(fct_reserve_results[reserve]),
+			    FILTER(fct_reserve_results,
+			        fct_reserve_results[scenario] = "Base" &&
+			        fct_reserve_results[method] = "BornhuetterFerguson"
+			    ),
+			    FILTER(dim_reserving_run,
+			        'dim_reserving_run'[is_promoted] = TRUE
+			    )
+			)
+		lineageTag: a1b2c3d4-3333-4a2b-9c3d-4e5f60718293
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Earned Premium' = SUM(fct_premium_rate[earned_premium_000]) * 1000
+		lineageTag: a1b2c3d4-4444-4a2b-9c3d-4e5f60718293
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Expense Booked' =
+			SUMX(
+			    VALUES(dim_rating_group[rating_group]),
+			    [Total Earned Premium] * CALCULATE(SUM(assumptions_by_group[expense_ratio]))
+			)
+		lineageTag: a1b2c3d4-5555-4a2b-9c3d-4e5f60718293
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ultimate Loss Ratio Booked' = DIVIDE([Total Ultimate Booked], [Total Earned Premium])
+		lineageTag: a1b2c3d4-6666-4a2b-9c3d-4e5f60718293
+
+	measure 'Combined Ratio Booked' = [Ultimate Loss Ratio Booked] + [Expense Ratio Booked]
+		lineageTag: a1b2c3d4-7777-4a2b-9c3d-4e5f60718293
+
+	measure 'Ultimate (Base, Promoted)' =
+			CALCULATE(
+			    SUM(fct_reserve_results[ultimate]),
+			    FILTER(fct_reserve_results, fct_reserve_results[scenario] = "Base"),
+			    FILTER(dim_reserving_run,
+			        'dim_reserving_run'[is_promoted] = TRUE
+			    )
+			)
+		lineageTag: b1b2c3d4-1111-4a2b-9c3d-4e5f60718294
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Reserve (Base, Promoted)' =
+			CALCULATE(
+			    SUM(fct_reserve_results[reserve]),
+			    FILTER(fct_reserve_results, fct_reserve_results[scenario] = "Base"),
+			    FILTER(dim_reserving_run,
+			        'dim_reserving_run'[is_promoted] = TRUE
+			    )
+			)
+		lineageTag: b1b2c3d4-2222-4a2b-9c3d-4e5f60718294
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Method Spread (Ultimate)' =
+			
+			VAR CurrentUltimates =
+			    ADDCOLUMNS(
+			        VALUES(fct_reserve_results[method]),
+			        "@ultimate", [Ultimate (Base, Promoted)]
+			    )
+			RETURN
+			    MAXX(CurrentUltimates, [@ultimate]) - MINX(CurrentUltimates, [@ultimate])
+		lineageTag: b1b2c3d4-3333-4a2b-9c3d-4e5f60718294
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% of Ultimate Paid' = ```
+			
+			/* 
+			Sums a column of the triangle (same dev_age_months, every accident year that's reached it),
+			divided by that same population's own ultimate (not a diagonal, and not the whole book's ultimate).
+			Only correct when dev_age_months is pinned to a single value by the visual.
+			*/
+			IF(
+			    HASONEVALUE(fct_triangle_cell[dev_age_months]),
+			    DIVIDE(
+			        SUM(fct_triangle_cell[cumulative_paid]),
+			        SUMX(
+			            fct_triangle_cell,
+			            CALCULATE([Ultimate (Base, Promoted)], REMOVEFILTERS(dim_development_age))
+			        )
+			    ),
+			    BLANK()
+			)
+			```
+		lineageTag: b1b2c3d4-4444-4a2b-9c3d-4e5f60718294
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Booked Reserve (ADC)' =
+			CALCULATE(
+			    SUM(fct_reinsurance_valuation[booked_reserve]),
+			    FILTER(fct_reinsurance_valuation, fct_reinsurance_valuation[scenario] = "Assumed stress"),
+			    FILTER(dim_reserving_run,
+			        'dim_reserving_run'[is_promoted] = TRUE
+			    )
+			)
+		lineageTag: c1b2c3d4-1111-4a2b-9c3d-4e5f60718295
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Attachment (ADC)' =
+			CALCULATE(
+			    SUM(fct_reinsurance_valuation[attachment]),
+			    FILTER(fct_reinsurance_valuation, fct_reinsurance_valuation[scenario] = "Assumed stress"),
+			    FILTER(dim_reserving_run,
+			        'dim_reserving_run'[is_promoted] = TRUE
+			    )
+			)
+		lineageTag: c1b2c3d4-2222-4a2b-9c3d-4e5f60718295
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Exhaustion (ADC)' =
+			CALCULATE(
+			    SUM(fct_reinsurance_valuation[exhaustion]),
+			    FILTER(fct_reinsurance_valuation, fct_reinsurance_valuation[scenario] = "Assumed stress"),
+			    FILTER(dim_reserving_run,
+			        'dim_reserving_run'[is_promoted] = TRUE
+			    )
+			)
+		lineageTag: c1b2c3d4-3333-4a2b-9c3d-4e5f60718295
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'ADC Limit' =
+			CALCULATE(
+			    SUM(fct_reinsurance_valuation[adc_limit]),
+			    FILTER(fct_reinsurance_valuation, fct_reinsurance_valuation[scenario] = "Assumed stress"),
+			    FILTER(dim_reserving_run,
+			        'dim_reserving_run'[is_promoted] = TRUE
+			    )
+			)
+		lineageTag: c1b2c3d4-4444-4a2b-9c3d-4e5f60718295
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Premium (ADC)' =
+			CALCULATE(
+			    SUM(fct_reinsurance_valuation[premium]),
+			    FILTER(fct_reinsurance_valuation, fct_reinsurance_valuation[scenario] = "Assumed stress"),
+			    FILTER(dim_reserving_run,
+			        'dim_reserving_run'[is_promoted] = TRUE
+			    )
+			)
+		lineageTag: c1b2c3d4-5555-4a2b-9c3d-4e5f60718295
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Stressed Reserve (Assumed Stress)' =
+			CALCULATE(
+			    SUM(fct_reinsurance_valuation[stressed_reserve]),
+			    FILTER(fct_reinsurance_valuation, fct_reinsurance_valuation[scenario] = "Assumed stress"),
+			    FILTER(dim_reserving_run,
+			        'dim_reserving_run'[is_promoted] = TRUE
+			    )
+			)
+		lineageTag: c1b2c3d4-6666-4a2b-9c3d-4e5f60718295
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Recovery (Assumed Stress)' =
+			CALCULATE(
+			    SUM(fct_reinsurance_valuation[recovery]),
+			    FILTER(fct_reinsurance_valuation, fct_reinsurance_valuation[scenario] = "Assumed stress"),
+			    FILTER(dim_reserving_run,
+			        'dim_reserving_run'[is_promoted] = TRUE
+			    )
+			)
+		lineageTag: c1b2c3d4-7777-4a2b-9c3d-4e5f60718295
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Net Benefit (Assumed Stress)' =
+			CALCULATE(
+			    SUM(fct_reinsurance_valuation[net_benefit]),
+			    FILTER(fct_reinsurance_valuation, fct_reinsurance_valuation[scenario] = "Assumed stress"),
+			    FILTER(dim_reserving_run,
+			        'dim_reserving_run'[is_promoted] = TRUE
+			    )
+			)
+		lineageTag: c1b2c3d4-8888-4a2b-9c3d-4e5f60718295
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Breakeven Inflation Rate' =
+			CALCULATE(
+			    SUM(fct_reinsurance_valuation[inflation_shock]),
+			    FILTER(fct_reinsurance_valuation, fct_reinsurance_valuation[scenario] = "Breakeven"),
+			    FILTER(dim_reserving_run,
+			        'dim_reserving_run'[is_promoted] = TRUE
+			    )
+			)
+		lineageTag: c1b2c3d4-9999-4a2b-9c3d-4e5f60718295
+
+	measure 'Exception Count' = COUNTROWS(fct_data_quality_exceptions)
+		lineageTag: d1b2c3d4-1111-4a2b-9c3d-4e5f60718296
+
+	measure 'Missing Rating Group Count' =
+			CALCULATE(
+			    COUNTROWS(fct_data_quality_exceptions),
+			    fct_data_quality_exceptions[rule_name] = "rating_group_missing"
+			)
+		lineageTag: d1b2c3d4-2222-4a2b-9c3d-4e5f60718296
+
+	measure 'Imputed Report Date Count' =
+			CALCULATE(
+			    COUNTROWS(fct_data_quality_exceptions),
+			    fct_data_quality_exceptions[rule_name] = "report_date_imputed"
+			)
+		lineageTag: d1b2c3d4-3333-4a2b-9c3d-4e5f60718296
+
+	measure 'Corrected Rate Change Count' =
+			CALCULATE(
+			    COUNTROWS(fct_data_quality_exceptions),
+			    fct_data_quality_exceptions[rule_name] = "rate_change_magnitude_corrected"
+			)
+		lineageTag: d1b2c3d4-4444-4a2b-9c3d-4e5f60718296
+
+	measure 'Valuation Date' = DATE(2025, 12, 31)
+		lineageTag: e1b2c3d4-1111-4a2b-9c3d-4e5f60718297
+
+	measure 'Claim Count' = COUNTROWS(fct_claim)
+		lineageTag: e1b2c3d4-2222-4a2b-9c3d-4e5f60718297
+
+	measure 'Average Severity' = DIVIDE(SUM(fct_claim[cumulative_paid]), [Claim Count])
+		lineageTag: e1b2c3d4-3333-4a2b-9c3d-4e5f60718297
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Closed Claim Count' = CALCULATE(COUNTROWS(fct_claim), fct_claim[status] = "Closed")
+		lineageTag: e1b2c3d4-4444-4a2b-9c3d-4e5f60718297
+
+	measure 'Closure Rate' = DIVIDE([Closed Claim Count], [Claim Count])
+		lineageTag: e1b2c3d4-5555-4a2b-9c3d-4e5f60718297
+
+	measure 'Average Time to Settle (Days)' =
+			AVERAGEX(
+			    FILTER(fct_claim, fct_claim[status] = "Closed"),
+			    DATEDIFF(fct_claim[report_date], fct_claim[close_date], DAY)
+			)
+		lineageTag: e1b2c3d4-6666-4a2b-9c3d-4e5f60718297
+
+	measure 'Average Age of Open Claims (Days)' =
+			VAR ValuationDate = [Valuation Date]
+			RETURN
+			    AVERAGEX(
+			        FILTER(fct_claim, fct_claim[status] = "Open"),
+			        DATEDIFF(fct_claim[report_date], ValuationDate, DAY)
+			    )
+		lineageTag: e1b2c3d4-7777-4a2b-9c3d-4e5f60718297
+
+	measure 'Open Claims 0-3 Months' =
+			VAR ValuationDate = [Valuation Date]
+			RETURN
+			    CALCULATE(
+			        COUNTROWS(fct_claim),
+			        FILTER(fct_claim,
+			            fct_claim[status] = "Open" &&
+			            DATEDIFF(fct_claim[report_date], ValuationDate, MONTH) <= 3
+			        )
+			    )
+		lineageTag: e1b2c3d4-8888-4a2b-9c3d-4e5f60718297
+
+	measure 'Open Claims 3-6 Months' =
+			VAR ValuationDate = [Valuation Date]
+			RETURN
+			    CALCULATE(
+			        COUNTROWS(fct_claim),
+			        FILTER(fct_claim,
+			            fct_claim[status] = "Open" &&
+			            DATEDIFF(fct_claim[report_date], ValuationDate, MONTH) > 3 &&
+			            DATEDIFF(fct_claim[report_date], ValuationDate, MONTH) <= 6
+			        )
+			    )
+		lineageTag: e1b2c3d4-9999-4a2b-9c3d-4e5f60718297
+
+	measure 'Open Claims 6-12 Months' =
+			VAR ValuationDate = [Valuation Date]
+			RETURN
+			    CALCULATE(
+			        COUNTROWS(fct_claim),
+			        FILTER(fct_claim,
+			            fct_claim[status] = "Open" &&
+			            DATEDIFF(fct_claim[report_date], ValuationDate, MONTH) > 6 &&
+			            DATEDIFF(fct_claim[report_date], ValuationDate, MONTH) <= 12
+			        )
+			    )
+		lineageTag: e1b2c3d4-aaaa-4a2b-9c3d-4e5f60718297
+
+	measure 'Open Claims 12+ Months' =
+			VAR ValuationDate = [Valuation Date]
+			RETURN
+			    CALCULATE(
+			        COUNTROWS(fct_claim),
+			        FILTER(fct_claim,
+			            fct_claim[status] = "Open" &&
+			            DATEDIFF(fct_claim[report_date], ValuationDate, MONTH) > 12
+			        )
+			    )
+		lineageTag: e1b2c3d4-bbbb-4a2b-9c3d-4e5f60718297
+
+	measure 'Total Paid Booked' = [Total Ultimate Booked] - [Total Reserve Booked]
+		lineageTag: b95d179a-9f66-4dbc-832b-67b61cdeb0cc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Expense Ratio Booked' = DIVIDE([Total Expense Booked], [Total Earned Premium])
+		lineageTag: a1b2c3d4-8888-4a2b-9c3d-4e5f60718293
+
+	column Column
+		formatString: 0
+		lineageTag: 1978d47a-0b6a-460b-b082-d89ded3bf1a7
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _measures = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 68ad9a98e15046efb1bc6b21a99c73e9
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

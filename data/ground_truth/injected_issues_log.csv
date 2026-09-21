@@ -1,0 +1,214 @@
+table,key,issue_type,detail
+claims_header,CLM-000537,missing_rating_group,was A
+claims_header,CLM-000765,missing_rating_group,was A
+claims_header,CLM-002688,missing_rating_group,was B
+claims_header,CLM-002953,missing_rating_group,was B
+claims_header,CLM-002057,missing_rating_group,was B
+claims_header,CLM-002419,missing_rating_group,was B
+claims_header,CLM-000207,missing_report_date,was 2020-11-05
+claims_header,CLM-001084,missing_report_date,was 2023-01-28
+claims_header,CLM-000181,missing_report_date,was 2020-12-26
+claims_header,CLM-001589,missing_report_date,was 2024-09-30
+claims_header,CLM-001944,missing_report_date,was 2025-03-13
+claims_header,CLM-000908,missing_report_date,was 2022-12-01
+claims_header,CLM-002393,missing_report_date,was 2022-03-27
+claims_header,CLM-002749,missing_report_date,was 2024-08-02
+claims_header,CLM-001376,missing_report_date,was 2024-12-25
+claims_header,CLM-000829,missing_report_date,was 2022-08-29
+claims_header,CLM-000396,missing_report_date,was 2021-12-12
+claims_header,CLM-001828,missing_report_date,was 2025-12-31
+claims_header,CLM-000325,missing_report_date,was 2021-05-30
+claims_transactions,TX-0004337,decimal_point_error,amount 3781.53 -> 378.15 (x0.1)
+claims_transactions,TX-0004431,decimal_point_error,amount 7272.4 -> 72724.0 (x10.0)
+claims_transactions,TX-0007957,decimal_point_error,amount 21922.21 -> 2192.22 (x0.1)
+claims_transactions,TX-0009363,decimal_point_error,amount 128.54 -> 12.85 (x0.1)
+claims_transactions,TX-0021185,decimal_point_error,amount 2836.18 -> 283.62 (x0.1)
+claims_transactions,TX-0023283,decimal_point_error,amount 9471.08 -> 947.11 (x0.1)
+claims_transactions,TX-0022227,decimal_point_error,amount 3686.75 -> 368.68 (x0.1)
+claims_transactions,TX-0015685,decimal_point_error,amount 1693.84 -> 16938.4 (x10.0)
+claims_transactions,TX-0019267,decimal_point_error,amount 356.11 -> 35.61 (x0.1)
+claims_transactions,TX-0002689,decimal_point_error,amount 1007.23 -> 10072.3 (x10.0)
+claims_transactions,TX-0005027,decimal_point_error,amount 14.91 -> 1.49 (x0.1)
+claims_transactions,TX-0001107,decimal_point_error,amount 3526.8 -> 352.68 (x0.1)
+claims_transactions,TX-0025941,decimal_point_error,amount 3614.07 -> 361.41 (x0.1)
+claims_transactions,TX-0015849,decimal_point_error,amount 18.53 -> 185.3 (x10.0)
+claims_transactions,TX-0006985,decimal_point_error,amount 7126.75 -> 712.68 (x0.1)
+claims_transactions,TX-0023383,decimal_point_error,amount 519.78 -> 51.98 (x0.1)
+claims_transactions,TX-0010995,decimal_point_error,amount 2454.58 -> 24545.8 (x10.0)
+claims_transactions,TX-0000431,decimal_point_error,amount 653.91 -> 65.39 (x0.1)
+claims_transactions,TX-0001613,decimal_point_error,amount 492.05 -> 49.21 (x0.1)
+claims_transactions,TX-0004095,decimal_point_error,amount 235.99 -> 23.6 (x0.1)
+claims_transactions,TX-0022759,decimal_point_error,amount 50267.39 -> 5026.74 (x0.1)
+claims_transactions,TX-0006543,decimal_point_error,amount 2598.11 -> 259.81 (x0.1)
+claims_transactions,TX-0003573,decimal_point_error,amount 19.18 -> 1.92 (x0.1)
+claims_transactions,TX-0016021,decimal_point_error,amount 652.15 -> 65.22 (x0.1)
+claims_transactions,TX-0004697,decimal_point_error,amount 717.73 -> 71.77 (x0.1)
+claims_transactions,TX-0000987,decimal_point_error,amount 1583.47 -> 158.35 (x0.1)
+claims_transactions,TX-0000887,decimal_point_error,amount 3593.18 -> 35931.8 (x10.0)
+claims_transactions,TX-0018199,decimal_point_error,amount 21524.79 -> 215247.9 (x10.0)
+claims_transactions,TX-0022055,decimal_point_error,amount 2155.41 -> 215.54 (x0.1)
+claims_transactions,TX-0022675,decimal_point_error,amount 3858.09 -> 385.81 (x0.1)
+claims_transactions,TX-0008653,decimal_point_error,amount 3497.35 -> 34973.5 (x10.0)
+claims_transactions,TX-0003667,decimal_point_error,amount 4034.79 -> 40347.9 (x10.0)
+claims_transactions,TX-0000513,decimal_point_error,amount 4588.73 -> 458.87 (x0.1)
+claims_transactions,TX-0005835,decimal_point_error,amount 2801.02 -> 28010.2 (x10.0)
+claims_transactions,TX-0012383,decimal_point_error,amount 1351.42 -> 135.14 (x0.1)
+claims_transactions,TX-0015519,decimal_point_error,amount 2195.2 -> 219.52 (x0.1)
+claims_transactions,TX-0016213,decimal_point_error,amount 1074.46 -> 107.45 (x0.1)
+claims_transactions,TX-0015103,decimal_point_error,amount 5405.78 -> 54057.8 (x10.0)
+claims_transactions,TX-0007307,decimal_point_error,amount 1285.14 -> 128.51 (x0.1)
+claims_transactions,TX-0003163,decimal_point_error,amount 85.45 -> 8.54 (x0.1)
+claims_transactions,TX-0017891,decimal_point_error,amount 19219.62 -> 1921.96 (x0.1)
+claims_transactions,TX-0000961,decimal_point_error,amount 1307.11 -> 13071.1 (x10.0)
+claims_transactions,TX-0003749,decimal_point_error,amount 1138.33 -> 11383.3 (x10.0)
+claims_transactions,TX-0023637,decimal_point_error,amount 4603.86 -> 460.39 (x0.1)
+claims_transactions,TX-0016427,decimal_point_error,amount 1062.08 -> 106.21 (x0.1)
+claims_transactions,TX-0009957,decimal_point_error,amount 560.32 -> 5603.2 (x10.0)
+claims_transactions,TX-0007273,decimal_point_error,amount 2600.6 -> 26006.0 (x10.0)
+claims_transactions,TX-0025323,decimal_point_error,amount 2118.68 -> 21186.8 (x10.0)
+claims_transactions,TX-0003675,decimal_point_error,amount 1235.87 -> 123.59 (x0.1)
+claims_transactions,TX-DUP00000,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000357
+claims_transactions,TX-DUP00001,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000536
+claims_transactions,TX-DUP00002,duplicate_transaction,duplicate of a genuine transaction on claim CLM-001389
+claims_transactions,TX-DUP00003,duplicate_transaction,duplicate of a genuine transaction on claim CLM-002078
+claims_transactions,TX-DUP00004,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000719
+claims_transactions,TX-DUP00005,duplicate_transaction,duplicate of a genuine transaction on claim CLM-001815
+claims_transactions,TX-DUP00006,duplicate_transaction,duplicate of a genuine transaction on claim CLM-002252
+claims_transactions,TX-DUP00007,duplicate_transaction,duplicate of a genuine transaction on claim CLM-001405
+claims_transactions,TX-DUP00008,duplicate_transaction,duplicate of a genuine transaction on claim CLM-002280
+claims_transactions,TX-DUP00009,duplicate_transaction,duplicate of a genuine transaction on claim CLM-002959
+claims_transactions,TX-DUP00010,duplicate_transaction,duplicate of a genuine transaction on claim CLM-001665
+claims_transactions,TX-DUP00011,duplicate_transaction,duplicate of a genuine transaction on claim CLM-002458
+claims_transactions,TX-DUP00012,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000152
+claims_transactions,TX-DUP00013,duplicate_transaction,duplicate of a genuine transaction on claim CLM-002173
+claims_transactions,TX-DUP00014,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000726
+claims_transactions,TX-DUP00015,duplicate_transaction,duplicate of a genuine transaction on claim CLM-002546
+claims_transactions,TX-DUP00016,duplicate_transaction,duplicate of a genuine transaction on claim CLM-002663
+claims_transactions,TX-DUP00017,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000409
+claims_transactions,TX-DUP00018,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000635
+claims_transactions,TX-DUP00019,duplicate_transaction,duplicate of a genuine transaction on claim CLM-001089
+claims_transactions,TX-DUP00020,duplicate_transaction,duplicate of a genuine transaction on claim CLM-002918
+claims_transactions,TX-DUP00021,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000932
+claims_transactions,TX-DUP00022,duplicate_transaction,duplicate of a genuine transaction on claim CLM-002398
+claims_transactions,TX-DUP00023,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000717
+claims_transactions,TX-DUP00024,duplicate_transaction,duplicate of a genuine transaction on claim CLM-001632
+claims_transactions,TX-DUP00025,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000481
+claims_transactions,TX-DUP00026,duplicate_transaction,duplicate of a genuine transaction on claim CLM-002743
+claims_transactions,TX-DUP00027,duplicate_transaction,duplicate of a genuine transaction on claim CLM-003032
+claims_transactions,TX-DUP00028,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000754
+claims_transactions,TX-DUP00029,duplicate_transaction,duplicate of a genuine transaction on claim CLM-001530
+claims_transactions,TX-DUP00030,duplicate_transaction,duplicate of a genuine transaction on claim CLM-002890
+claims_transactions,TX-DUP00031,duplicate_transaction,duplicate of a genuine transaction on claim CLM-003025
+claims_transactions,TX-DUP00032,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000160
+claims_transactions,TX-DUP00033,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000935
+claims_transactions,TX-DUP00034,duplicate_transaction,duplicate of a genuine transaction on claim CLM-001002
+claims_transactions,TX-DUP00035,duplicate_transaction,duplicate of a genuine transaction on claim CLM-001304
+claims_transactions,TX-DUP00036,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000818
+claims_transactions,TX-DUP00037,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000118
+claims_transactions,TX-DUP00038,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000502
+claims_transactions,TX-DUP00039,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000249
+claims_transactions,TX-DUP00040,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000690
+claims_transactions,TX-DUP00041,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000233
+claims_transactions,TX-DUP00042,duplicate_transaction,duplicate of a genuine transaction on claim CLM-002384
+claims_transactions,TX-DUP00043,duplicate_transaction,duplicate of a genuine transaction on claim CLM-002771
+claims_transactions,TX-DUP00044,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000837
+claims_transactions,TX-DUP00045,duplicate_transaction,duplicate of a genuine transaction on claim CLM-001039
+claims_transactions,TX-DUP00046,duplicate_transaction,duplicate of a genuine transaction on claim CLM-003151
+claims_transactions,TX-DUP00047,duplicate_transaction,duplicate of a genuine transaction on claim CLM-001879
+claims_transactions,TX-DUP00048,duplicate_transaction,duplicate of a genuine transaction on claim CLM-003049
+claims_transactions,TX-DUP00049,duplicate_transaction,duplicate of a genuine transaction on claim CLM-001411
+claims_transactions,TX-DUP00050,duplicate_transaction,duplicate of a genuine transaction on claim CLM-002289
+claims_transactions,TX-DUP00051,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000963
+claims_transactions,TX-DUP00052,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000210
+claims_transactions,TX-DUP00053,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000074
+claims_transactions,TX-DUP00054,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000878
+claims_transactions,TX-DUP00055,duplicate_transaction,duplicate of a genuine transaction on claim CLM-001662
+claims_transactions,TX-DUP00056,duplicate_transaction,duplicate of a genuine transaction on claim CLM-001050
+claims_transactions,TX-DUP00057,duplicate_transaction,duplicate of a genuine transaction on claim CLM-003044
+claims_transactions,TX-DUP00058,duplicate_transaction,duplicate of a genuine transaction on claim CLM-000520
+claims_transactions,TX-0010342,text_placeholder,amount replaced with ''
+claims_transactions,TX-0024226,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0009461,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0024261,text_placeholder,amount replaced with ''
+claims_transactions,TX-0009180,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0009784,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0007875,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0025890,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0004190,text_placeholder,amount replaced with ''
+claims_transactions,TX-0025461,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0013066,text_placeholder,amount replaced with ''
+claims_transactions,TX-0022935,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0022306,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0023390,text_placeholder,amount replaced with ''
+claims_transactions,TX-0010553,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0019191,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0019876,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0000724,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0017133,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0000829,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0001595,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0019600,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0002674,text_placeholder,amount replaced with ''
+claims_transactions,TX-0001449,text_placeholder,amount replaced with ''
+claims_transactions,TX-0016169,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0017423,text_placeholder,amount replaced with ''
+claims_transactions,TX-0018663,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0002710,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0014229,text_placeholder,amount replaced with ''
+claims_transactions,TX-0009310,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0024671,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0015370,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0023600,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0019411,text_placeholder,amount replaced with ''
+claims_transactions,TX-0002254,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0024906,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0019296,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0025101,text_placeholder,amount replaced with ''
+claims_transactions,TX-0025833,text_placeholder,amount replaced with ''
+claims_transactions,TX-0023361,text_placeholder,amount replaced with ''
+claims_transactions,TX-0001393,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0012376,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0005701,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0008585,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0004391,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0009129,text_placeholder,amount replaced with ''
+claims_transactions,TX-0002181,text_placeholder,amount replaced with ''
+claims_transactions,TX-0013548,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0007558,text_placeholder,amount replaced with ''
+claims_transactions,TX-0014667,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0003067,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0008519,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0020070,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0016760,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0016889,text_placeholder,amount replaced with ''
+claims_transactions,TX-0006113,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0017309,text_placeholder,amount replaced with 'N/A'
+claims_transactions,TX-0010535,text_placeholder,amount replaced with ''
+claims_transactions,TX-0010377,text_placeholder,amount replaced with '-'
+claims_transactions,TX-0024737,negative_payment,amount 5868.8 -> -5868.8
+claims_transactions,TX-0009621,negative_payment,amount 11309.07 -> -11309.07
+claims_transactions,TX-0014769,negative_payment,amount 749.24 -> -749.24
+claims_transactions,TX-0024341,negative_payment,amount 2284.32 -> -2284.32
+claims_transactions,TX-0003205,negative_payment,amount 2345.64 -> -2345.64
+claims_transactions,TX-0015785,negative_payment,amount 3923.38 -> -3923.38
+claims_transactions,TX-0011221,negative_payment,amount 621.02 -> -621.02
+claims_transactions,TX-0013793,negative_payment,amount 1564.94 -> -1564.94
+claims_transactions,TX-0000655,negative_payment,amount 115.36 -> -115.36
+claims_transactions,TX-0005087,negative_payment,amount 86.14 -> -86.14
+claims_transactions,TX-0017139,negative_payment,amount 3463.9 -> -3463.9
+claims_transactions,TX-0004211,negative_payment,amount 693.22 -> -693.22
+claims_transactions,TX-0014251,negative_payment,amount 864.61 -> -864.61
+claims_transactions,TX-0023503,negative_payment,amount 1010.84 -> -1010.84
+claims_transactions,TX-0006355,negative_payment,amount 1861.32 -> -1861.32
+claims_transactions,TX-0024485,negative_payment,amount 1832.51 -> -1832.51
+claims_transactions,TX-0024295,negative_payment,amount 1909.93 -> -1909.93
+claims_transactions,TX-0026657,negative_payment,amount 810.73 -> -810.73
+claims_transactions,TX-0001599,negative_payment,amount 4809.15 -> -4809.15
+claims_transactions,TX-0014312,orphan_claim_id,claim_id CLM-002053 -> CLM-900000 (does not exist in claims_header)
+claims_transactions,TX-0001586,orphan_claim_id,claim_id CLM-000223 -> CLM-900001 (does not exist in claims_header)
+claims_transactions,TX-0000896,orphan_claim_id,claim_id CLM-000128 -> CLM-900002 (does not exist in claims_header)
+claims_transactions,TX-0005263,date_out_of_bounds,transaction_date 2024-05-28 -> 2026-01-30 (after valuation date / year mis-key)
+claims_transactions,TX-0003227,date_out_of_bounds,transaction_date 2021-10-17 -> 2026-03-01 (after valuation date / year mis-key)
+claims_transactions,TX-0014938,date_out_of_bounds,transaction_date 2021-02-07 -> 2026-03-31 (after valuation date / year mis-key)
+rate_changes,2022-C,magnitude_error,rate_change 0.02 -> 2.0
+earned_premium,2023-B,missing_value,earned_premium_000 3994.3 -> blank

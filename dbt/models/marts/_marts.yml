@@ -1,0 +1,117 @@
+version: 2
+
+models:
+  - name: dim_accident_year
+    columns:
+      - name: accident_year
+        tests: [not_null, unique]
+
+  - name: fct_claim
+    columns:
+      - name: claim_id
+        tests: [not_null, unique]
+      - name: rating_group
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['A', 'B', 'C', 'Unclassified']
+      - name: cumulative_paid
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: true
+      - name: handler_id
+        description: Nullable - "Unclassified" (missing rating_group) claims are never assigned a handler.
+        tests:
+          - relationships:
+              to: ref('dim_claims_handler')
+              field: handler_id
+
+  - name: fct_claim_transactions
+    columns:
+      - name: transaction_id
+        tests: [not_null, unique]
+      - name: claim_id
+        tests:
+          - relationships:
+              to: ref('fct_claim')
+              field: claim_id
+
+  - name: fct_triangle_cell
+    description: >
+      The validated cumulative-paid triangle. cumulative_paid must never
+      decrease with development age - this account has no salvage or
+      subrogation recoveries, so a fall would mean either a data problem
+      that slipped past validation, or a bug in this model.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [rating_group, accident_year, dev_age_months]
+    columns:
+      - name: dev_age_months
+        tests:
+          - accepted_values:
+              arguments:
+                values: [12, 24, 36, 48, 60, 72]
+      - name: cumulative_paid
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: true
+
+  - name: fct_premium_rate
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [rating_group, accident_year]
+    columns:
+      - name: earned_premium_000
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: false
+      - name: rate_change
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: -0.25
+              max_value: 0.25
+
+  - name: fct_data_quality_exceptions
+    columns:
+      - name: source_table
+        tests: [not_null]
+      - name: rule_name
+        tests: [not_null]
+
+seeds:
+  - name: dim_rating_group
+    columns:
+      - name: rating_group
+        tests: [not_null, unique]
+  - name: dim_development_age
+    columns:
+      - name: dev_age_months
+        tests: [not_null, unique]
+  - name: assumptions_by_group
+    columns:
+      - name: rating_group
+        tests: [not_null, unique]
+  - name: assumptions_global
+    columns:
+      - name: parameter
+        tests: [not_null, unique]
+  - name: dim_claims_handler
+    columns:
+      - name: handler_id
+        tests: [not_null, unique]
+      - name: email
+        tests: [not_null, unique]
+      - name: role
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Claims Handler', 'Reserving Actuary', 'Senior Management']
+      - name: assigned_rating_group
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['A', 'B', 'C']

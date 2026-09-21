@@ -1,0 +1,34 @@
+table dim_development_age
+	lineageTag: b2579da3-646f-4f02-9086-61fda5d3f91b
+
+	column dev_age_months
+		dataType: int64
+		formatString: 0
+		lineageTag: 6680db5f-45f7-4683-b2f6-0b08452e1566
+		summarizeBy: none
+		sourceColumn: dev_age_months
+
+		annotation SummarizationSetBy = Automatic
+
+	column sequence_order
+		dataType: int64
+		formatString: 0
+		lineageTag: b8b29414-0a2c-4f28-aa0a-a01a631a7cf0
+		summarizeBy: none
+		sourceColumn: sequence_order
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_development_age = m
+		mode: import
+		source =
+				let
+				    Conn = PostgresMartsConnection,
+				    Source = PostgreSQL.Database(Conn[Server], Conn[Database], [Query = "SELECT * FROM marts.dim_development_age"])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

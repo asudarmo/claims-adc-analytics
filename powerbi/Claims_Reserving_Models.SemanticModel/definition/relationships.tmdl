@@ -1,0 +1,97 @@
+relationship d4705c21-c522-460e-b3cb-7ca94dd06268
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fct_claim.accident_date
+	toColumn: dim_date.Date
+
+relationship a1ed6a80-d627-4057-a038-281147d3687e
+	isActive: false
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fct_claim.report_date
+	toColumn: dim_date.Date
+
+relationship f9d70f4b-206c-4687-9526-10ff9302b0ea
+	isActive: false
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fct_claim.close_date
+	toColumn: dim_date.Date
+
+relationship 88e236d2-713c-4b00-9bfc-5e055058b4a2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fct_claim_transactions.transaction_date
+	toColumn: dim_date.Date
+
+relationship AutoDetected_b101ef82-c0ad-4dbd-9cde-037d8888bcce
+	fromColumn: fct_claim.rating_group
+	toColumn: dim_rating_group.rating_group
+
+relationship AutoDetected_e005037c-775e-4d28-906d-1a609fa9c315
+	fromColumn: fct_claim_transactions.rating_group
+	toColumn: dim_rating_group.rating_group
+
+relationship AutoDetected_9178d9ba-8446-4417-bafb-7ee742bf27a8
+	fromColumn: fct_triangle_cell.rating_group
+	toColumn: dim_rating_group.rating_group
+
+relationship AutoDetected_48a707cf-714b-4e4a-bc66-29912e7c8628
+	fromColumn: fct_premium_rate.rating_group
+	toColumn: dim_rating_group.rating_group
+
+relationship AutoDetected_c830cb68-781e-465a-b883-ef5a1b6ee18a
+	fromColumn: fct_reserve_results.rating_group
+	toColumn: dim_rating_group.rating_group
+
+relationship AutoDetected_47694a26-946a-42ad-aaeb-8cfb7dbdbe3a
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: assumptions_by_group.rating_group
+	toColumn: dim_rating_group.rating_group
+
+relationship AutoDetected_31f90e17-3b80-405e-8a9a-6aa66b1929c3
+	fromColumn: fct_triangle_cell.dev_age_months
+	toColumn: dim_development_age.dev_age_months
+
+relationship AutoDetected_f59634b2-60b0-44ed-b880-86ff7d729a6d
+	fromColumn: fct_claim.accident_year
+	toColumn: dim_accident_year.accident_year
+
+relationship AutoDetected_5b462789-c9a7-4fea-a48c-69c93bbaf48a
+	fromColumn: fct_claim_transactions.accident_year
+	toColumn: dim_accident_year.accident_year
+
+relationship AutoDetected_3ab3836d-9cc2-4921-a07f-e268914e41ca
+	fromColumn: fct_triangle_cell.accident_year
+	toColumn: dim_accident_year.accident_year
+
+relationship AutoDetected_ca67667a-a393-47e2-9dc1-f6c8d181203b
+	fromColumn: fct_premium_rate.accident_year
+	toColumn: dim_accident_year.accident_year
+
+relationship AutoDetected_11735db4-943b-4ca7-a441-50154d4842cb
+	fromColumn: fct_reserve_results.accident_year
+	toColumn: dim_accident_year.accident_year
+
+relationship AutoDetected_99f3f06b-c648-4baf-827b-659b24e6741a
+	fromColumn: fct_claim.handler_id
+	toColumn: dim_claims_handler.handler_id
+
+relationship AutoDetected_3af9719d-159f-47f5-bef1-fae959060d02
+	fromColumn: fct_reserve_results.run_id
+	toColumn: dim_reserving_run.run_id
+
+relationship AutoDetected_db456a5b-b0b5-4576-8215-aaa291696cc0
+	fromColumn: fct_reinsurance_valuation.run_id
+	toColumn: dim_reserving_run.run_id
+
+relationship AutoDetected_fe6183d3-0897-4229-befb-124815a82cb5
+	fromColumn: fct_reserving_run_parameters.run_id
+	toColumn: dim_reserving_run.run_id
+
+relationship AutoDetected_d28c8dff-db6c-459a-9fde-b97a44ac5903
+	isActive: false
+	fromColumn: fct_claim_transactions.claim_id
+	toColumn: fct_claim.claim_id
+
+relationship fct_reserving_run_parameters_rating_group
+	fromColumn: fct_reserving_run_parameters.rating_group
+	toColumn: dim_rating_group.rating_group
+

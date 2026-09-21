@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    description: >
+      Landing zone loaded by scripts/load_raw_to_postgres.py, mirroring
+      data/raw_extract/*.csv exactly - untouched, issues and all. See
+      data/DATA_DICTIONARY.md for the full column reference.
+    tables:
+      - name: claims_header
+      - name: claims_transactions
+      - name: earned_premium
+      - name: rate_changes

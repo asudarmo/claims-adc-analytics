@@ -1,0 +1,96 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "887fabf0932036339326",
+  "position": {
+    "x": 22.5,
+    "y": 105,
+    "z": 0,
+    "height": 307.5,
+    "width": 892.5,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_triangle_cell"
+                    }
+                  },
+                  "Property": "dev_age_months"
+                }
+              },
+              "queryRef": "fct_triangle_cell.dev_age_months",
+              "nativeQueryRef": "dev_age_months",
+              "active": true
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_accident_year"
+                    }
+                  },
+                  "Property": "accident_year"
+                }
+              },
+              "queryRef": "dim_accident_year.accident_year",
+              "nativeQueryRef": "accident_year",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fct_triangle_cell"
+                        }
+                      },
+                      "Property": "incremental_paid"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(fct_triangle_cell.incremental_paid)",
+              "nativeQueryRef": "Sum of incremental_paid"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Incremental Paid Development Triangle'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

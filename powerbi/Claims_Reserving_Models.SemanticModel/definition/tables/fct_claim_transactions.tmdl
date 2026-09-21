@@ -1,0 +1,76 @@
+table fct_claim_transactions
+	lineageTag: 8b394d96-6b2c-4ce0-b958-75f2b2930d51
+
+	column transaction_id
+		dataType: string
+		lineageTag: c2491314-28a3-46ab-816a-456bbedc1de9
+		summarizeBy: none
+		sourceColumn: transaction_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column claim_id
+		dataType: string
+		lineageTag: 15f9e80f-a182-4cef-bd60-a3c47ba48b82
+		summarizeBy: none
+		sourceColumn: claim_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column rating_group
+		dataType: string
+		lineageTag: eee6a92f-0870-4a48-b369-067d0930644f
+		summarizeBy: none
+		sourceColumn: rating_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column accident_year
+		dataType: int64
+		formatString: 0
+		lineageTag: de680845-f225-4d16-a7a6-cb272dce4cad
+		summarizeBy: none
+		sourceColumn: accident_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column transaction_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6d46ad33-69e3-44b2-8325-b439fd0ae3e4
+		summarizeBy: none
+		sourceColumn: transaction_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column transaction_type
+		dataType: string
+		lineageTag: 06e2a706-d102-4283-b659-962af193ece8
+		summarizeBy: none
+		sourceColumn: transaction_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column amount
+		dataType: double
+		lineageTag: 80768512-58e5-4a84-be0d-65e6bc016918
+		summarizeBy: sum
+		sourceColumn: amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fct_claim_transactions = m
+		mode: import
+		source =
+				let
+				    Conn = PostgresMartsConnection,
+				    Source = PostgreSQL.Database(Conn[Server], Conn[Database], [Query = "SELECT * FROM marts.fct_claim_transactions"])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

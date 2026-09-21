@@ -1,0 +1,93 @@
+version: 2
+
+sources:
+  - name: reserving_engine
+    schema: marts
+    description: >
+      Written by the standalone Python reserving engine (engine/main.py,
+      engine/promote.py), not by dbt. Declared here only so dbt can assert
+      basic structural integrity on the engine's output and so the tables
+      show up in dbt docs alongside everything they're built from. These
+      tables are append-only run history, not rebuilt by dbt, which is why
+      they're a source rather than a model - a dbt table materialization
+      would be dropped and recreated on every dbt run, wiping the history.
+    tables:
+      - name: dim_reserving_run
+        description: >
+          One row per run - run_id, invocation_id (shared by every run
+          produced by the same engine.main() call), trend_source (Assumed
+          / Estimated), timestamp, an optional label, and which run (if
+          any) is promoted.
+        columns:
+          - name: run_id
+            tests: [not_null, unique]
+          - name: invocation_id
+            tests: [not_null]
+          - name: trend_source
+            tests:
+              - accepted_values:
+                  arguments:
+                    values: ['Assumed', 'Estimated']
+          - name: is_promoted
+            tests: [not_null]
+
+      - name: fct_reserving_run_parameters
+        description: run_id x parameter_name x rating_group -> value. Every assumption (and the estimated trend, for reference even on an Assumed run) used by that run, logged for provenance.
+        columns:
+          - name: run_id
+            tests: [not_null]
+          - name: parameter_name
+            tests: [not_null]
+
+      - name: fct_reserve_results
+        description: >
+          run_id x rating_group x accident_year x method x scenario ->
+          ultimate, reserve, loss ratio, combined ratio. Which trend
+          source produced a run lives on dim_reserving_run, not here, join
+          through run_id rather than expecting a column on this table.
+        columns:
+          - name: run_id
+            tests: [not_null]
+          - name: rating_group
+            tests:
+              - accepted_values:
+                  arguments:
+                    values: ['A', 'B', 'C']
+          - name: method
+            tests:
+              - accepted_values:
+                  arguments:
+                    values: ['ChainLadder', 'ExpectedClaims', 'BornhuetterFerguson']
+          - name: scenario
+            tests:
+              - accepted_values:
+                  arguments:
+                    values: ['Base', 'Extension']
+          - name: ultimate
+            tests: [not_null]
+        tests:
+          - dbt_utils.unique_combination_of_columns:
+              combination_of_columns: [run_id, rating_group, accident_year, method, scenario]
+
+      - name: fct_reinsurance_valuation
+        description: >
+          run_id x scenario (Assumed stress, Breakeven) x booked_method ->
+          account-level Adverse Development Cover valuation, valued once
+          per candidate reserving basis rather than assuming
+          BornhuetterFerguson is the only one a committee might book. Trend
+          source lives on dim_reserving_run, join through run_id.
+        columns:
+          - name: run_id
+            tests: [not_null]
+          - name: scenario
+            tests: [not_null]
+          - name: booked_method
+            tests:
+              - accepted_values:
+                  arguments:
+                    values: ['ChainLadder', 'ExpectedClaims', 'BornhuetterFerguson']
+          - name: adc_limit
+            tests: [not_null]
+        tests:
+          - dbt_utils.unique_combination_of_columns:
+              combination_of_columns: [run_id, scenario, booked_method]

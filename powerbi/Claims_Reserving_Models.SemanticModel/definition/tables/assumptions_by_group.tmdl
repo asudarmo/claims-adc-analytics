@@ -1,0 +1,54 @@
+table assumptions_by_group
+	lineageTag: 5036b814-43fd-4fbf-bcba-4049a2d6b00f
+
+	column rating_group
+		dataType: string
+		lineageTag: 887011a1-b02d-454e-8aa7-d73d3075301c
+		summarizeBy: none
+		sourceColumn: rating_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column plan_loss_ratio
+		dataType: double
+		lineageTag: c7aee591-0c69-49a2-8202-25803a331b24
+		summarizeBy: none
+		sourceColumn: plan_loss_ratio
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ext_tail_factor
+		dataType: double
+		lineageTag: 499a7670-aa34-4023-ba7b-c76da829fa69
+		summarizeBy: none
+		sourceColumn: ext_tail_factor
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column expense_ratio
+		dataType: double
+		lineageTag: ab75daa8-6132-41b3-b547-8351e9446ebc
+		summarizeBy: none
+		sourceColumn: expense_ratio
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition assumptions_by_group = m
+		mode: import
+		source =
+				let
+				    Conn = PostgresMartsConnection,
+				    Source = PostgreSQL.Database(Conn[Server], Conn[Database], [Query = "SELECT * FROM marts.assumptions_by_group"])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

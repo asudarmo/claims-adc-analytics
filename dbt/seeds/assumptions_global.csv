@@ -1,0 +1,9 @@
+parameter,value,note
+loss_trend,0.055,"Annual severity trend used to restate ultimates to the latest accident year's cost level. Matches the trend used to simulate the data."
+cred_full,1082,"Full credibility standard, in claim count, for the limited fluctuation credibility formula."
+cred_mature_years,3,"Number of oldest accident years used to derive the experience indication (2020-2022)."
+ext_tail_lag_years,3,"Average payment lag, in years, of tail payments beyond 72 months development."
+ext_inflation_shock,0.04,"Additional annual claims inflation applied to unpaid amounts under the stress scenario."
+adc_attachment_pct,1.05,"Adverse Development Cover attachment point, as a fraction of the booked reserve."
+adc_exhaustion_pct,1.30,"Adverse Development Cover exhaustion point, as a fraction of the booked reserve."
+adc_rate_on_line,0.12,"Adverse Development Cover premium, as a fraction of the limit of cover."

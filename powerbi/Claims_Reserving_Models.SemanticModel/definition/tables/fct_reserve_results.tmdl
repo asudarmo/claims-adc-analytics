@@ -1,0 +1,117 @@
+table fct_reserve_results
+	lineageTag: ed7e1ac6-18b0-40de-86be-96297e5751f8
+
+	column rating_group
+		dataType: string
+		lineageTag: a362f549-2810-4db3-b0aa-37f71860e78b
+		summarizeBy: none
+		sourceColumn: rating_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column accident_year
+		dataType: int64
+		formatString: 0
+		lineageTag: 121b63b1-cf49-45ab-8aac-d91b7de299f2
+		summarizeBy: none
+		sourceColumn: accident_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column method
+		dataType: string
+		lineageTag: 005f1272-0b6e-48b3-bf3a-2b8ab12bb59a
+		summarizeBy: none
+		sourceColumn: method
+
+		annotation SummarizationSetBy = Automatic
+
+	column paid_to_date
+		dataType: double
+		lineageTag: f651ce24-a021-478b-8e73-0694ceb5a96a
+		summarizeBy: sum
+		sourceColumn: paid_to_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ultimate
+		dataType: double
+		lineageTag: 8adcd73e-eda3-4c63-bae5-491314c9ab2e
+		summarizeBy: sum
+		sourceColumn: ultimate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column scenario
+		dataType: string
+		lineageTag: 3044a2fe-753c-44ce-9f6d-d40b3d9444ff
+		summarizeBy: none
+		sourceColumn: scenario
+
+		annotation SummarizationSetBy = Automatic
+
+	column reserve
+		dataType: double
+		lineageTag: c3374f9d-8323-4ef3-a65f-a8283527bcb5
+		summarizeBy: sum
+		sourceColumn: reserve
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column loss_ratio
+		dataType: double
+		lineageTag: 2df0eec4-1d7c-483d-9b7f-781c50f51ee1
+		summarizeBy: none
+		sourceColumn: loss_ratio
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column expense_ratio
+		dataType: double
+		lineageTag: c50048b1-0b37-4267-818d-8b0271320ec1
+		summarizeBy: none
+		sourceColumn: expense_ratio
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column combined_ratio
+		dataType: double
+		lineageTag: 4ddc04aa-b8a2-49ec-9ac7-b50fbdf42da8
+		summarizeBy: none
+		sourceColumn: combined_ratio
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column run_id
+		dataType: string
+		lineageTag: 66a8603d-5067-4616-9f9c-adbcb528dc93
+		summarizeBy: none
+		sourceColumn: run_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fct_reserve_results = m
+		mode: import
+		source =
+				let
+				    Conn = PostgresMartsConnection,
+				    Source = PostgreSQL.Database(Conn[Server], Conn[Database], [Query = "SELECT * FROM marts.fct_reserve_results"])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

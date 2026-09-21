@@ -1,0 +1,4 @@
+rating_group,label,description
+A,Light commercial vehicles,"Largest by claim count, fastest settlement, lowest average severity."
+B,Heavy goods vehicles,"Intermediate claim count, severity and settlement speed."
+C,Specialist haulage,"Smallest claim count, highest average severity, longest settlement tail due to a higher share of bodily injury claims."

@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: stg_claims_header
+    description: Typed pass-through of raw.claims_header. No cleaning here - see intermediate.int_claims_header_clean.
+    columns:
+      - name: claim_id
+        tests: [not_null, unique]
+      - name: status
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Open', 'Closed']
+
+  - name: stg_claims_transactions
+    description: Typed pass-through of raw.claims_transactions, with a safely-cast amount_numeric alongside the raw text.
+    columns:
+      - name: transaction_id
+        tests: [not_null, unique]
+      - name: claim_id
+        tests: [not_null]
+      - name: transaction_type
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Payment', 'CaseReserveEstimate']
+
+  - name: stg_earned_premium
+    columns:
+      - name: rating_group
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['A', 'B', 'C']
+
+  - name: stg_rate_changes
+    columns:
+      - name: rating_group
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['A', 'B', 'C']

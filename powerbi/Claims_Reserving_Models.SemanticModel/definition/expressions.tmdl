@@ -1,0 +1,12 @@
+expression PostgresMartsConnection =
+		let
+		    PGServer = "localhost:5432",
+		    PGDatabase = "claims_reserving"
+		in
+		    [Server = PGServer, Database = PGDatabase]
+	lineageTag: 8176e060-371e-423b-a231-54fe49209b51
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Record
+

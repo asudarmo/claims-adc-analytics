@@ -1,0 +1,81 @@
+table fct_premium_rate
+	lineageTag: 76418501-5a35-4d8b-a3cf-4960b9e9b832
+
+	column accident_year
+		dataType: int64
+		formatString: 0
+		lineageTag: b17528c5-a98d-4edb-af94-bd2de3cc669b
+		summarizeBy: none
+		sourceColumn: accident_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column rating_group
+		dataType: string
+		lineageTag: 46b49ac8-1065-461a-a3a3-a25a543e8dfe
+		summarizeBy: none
+		sourceColumn: rating_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column earned_premium_000
+		dataType: double
+		lineageTag: 2864e0fd-9019-4587-a7c2-484316d2c6f0
+		summarizeBy: sum
+		sourceColumn: earned_premium_000
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column earned_premium_was_missing
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 75cf452e-3278-47f7-848b-2d683d0f3ed7
+		summarizeBy: none
+		sourceColumn: earned_premium_was_missing
+
+		annotation SummarizationSetBy = Automatic
+
+	column rate_change
+		dataType: double
+		lineageTag: 1e92db27-b2cc-4ecf-a5b7-2dfb9dbea558
+		summarizeBy: none
+		sourceColumn: rate_change
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column rate_change_was_corrected
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 722048d5-7042-4024-8156-26362ac6e16c
+		summarizeBy: none
+		sourceColumn: rate_change_was_corrected
+
+		annotation SummarizationSetBy = Automatic
+
+	column cumulative_rate_index
+		dataType: double
+		lineageTag: 8914579a-ae49-48fc-b108-d4b6a65eb15e
+		summarizeBy: none
+		sourceColumn: cumulative_rate_index
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fct_premium_rate = m
+		mode: import
+		source =
+				let
+				    Conn = PostgresMartsConnection,
+				    Source = PostgreSQL.Database(Conn[Server], Conn[Database], [Query = "SELECT * FROM marts.fct_premium_rate"])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

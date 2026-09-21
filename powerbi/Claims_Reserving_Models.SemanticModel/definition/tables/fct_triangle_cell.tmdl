@@ -1,0 +1,62 @@
+table fct_triangle_cell
+	lineageTag: ae0f82fc-3af1-4db7-a42d-90e1209112dc
+
+	column rating_group
+		dataType: string
+		lineageTag: 62150cfc-b431-4131-a91c-cc97c080abb5
+		summarizeBy: none
+		sourceColumn: rating_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column accident_year
+		dataType: int64
+		formatString: 0
+		lineageTag: 3dd84ab8-7ed8-4b46-8fd3-eb48bdf3f053
+		summarizeBy: none
+		sourceColumn: accident_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column dev_age_months
+		dataType: int64
+		formatString: 0
+		lineageTag: 605174cc-850f-4e97-a9c8-88dfae61afc9
+		summarizeBy: none
+		sourceColumn: dev_age_months
+
+		annotation SummarizationSetBy = Automatic
+
+	column incremental_paid
+		dataType: double
+		lineageTag: 0949de06-49a2-4e8e-9259-9b3a2cfca83d
+		summarizeBy: sum
+		sourceColumn: incremental_paid
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cumulative_paid
+		dataType: double
+		lineageTag: 499f75b6-a4d5-4381-9aa9-15b985e486d8
+		summarizeBy: none
+		sourceColumn: cumulative_paid
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fct_triangle_cell = m
+		mode: import
+		source =
+				let
+				    Conn = PostgresMartsConnection,
+				    Source = PostgreSQL.Database(Conn[Server], Conn[Database], [Query = "SELECT * FROM marts.fct_triangle_cell"])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

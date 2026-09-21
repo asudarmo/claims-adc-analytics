@@ -1,0 +1,21 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+dbt_packages/
+target/
+logs/
+dbt/.user.yml
+
+# Office lock files (created while a .docx/.xlsx is open, not real content)
+~$*
+
+# Power BI Desktop's per-machine cache and local settings, not part of the
+# actual model/report definition, regenerated automatically on open
+**/.pbi/cache.abf
+**/.pbi/localSettings.json
+**/.pbi/editorSettings.json
+**/DAXQueries/
+
+Notes.md

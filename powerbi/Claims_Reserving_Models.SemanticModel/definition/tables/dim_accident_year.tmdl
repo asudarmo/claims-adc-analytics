@@ -1,0 +1,34 @@
+table dim_accident_year
+	lineageTag: 1c0eddbd-59c7-4d3d-a9db-de6b32e2e385
+
+	column accident_year
+		dataType: int64
+		formatString: 0
+		lineageTag: 9999bd3f-918f-41b0-937d-fadd5a7004d4
+		summarizeBy: none
+		sourceColumn: accident_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_mature
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3a4b6849-0f86-42fe-a6b8-2609cb38d9e7
+		summarizeBy: none
+		sourceColumn: is_mature
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_accident_year = m
+		mode: import
+		source =
+				let
+				    Conn = PostgresMartsConnection,
+				    Source = PostgreSQL.Database(Conn[Server], Conn[Database], [Query = "SELECT * FROM marts.dim_accident_year"])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
