@@ -18,8 +18,8 @@ assumed to work.
 
 Data generation, validation, the warehouse layer, and the reserving engine
 are built and verified end to end against a live Postgres instance. The
-Power BI dashboard is in progress, see [PLAN.md](PLAN.md) for the live task
-list.
+Power BI dashboard is in progress, see [docs/dashboard-design.md](docs/dashboard-design.md)
+for what's built and what's left page by page.
 
 ## How it works
 
@@ -69,7 +69,6 @@ Full detail, prerequisites, and how to reset are in
 - [Dashboard design](docs/dashboard-design.md), page-by-page chart ideation for the report layer
 - [Setup & running](docs/setup.md), prerequisites, environment, reproducing every step
 - [Data dictionary](data/DATA_DICTIONARY.md), every generated column, its nullability, and which rows carry a seeded issue
-- [Plan & progress](PLAN.md), the living task list and the reasoning behind each decision made along the way
 
 ## Project structure
 

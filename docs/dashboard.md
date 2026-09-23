@@ -3,9 +3,8 @@
 `powerbi/Claims_Reserving_Models.pbip` is the Power BI Project (`.pbip` +
 TMDL), the git-friendly format that makes it possible to edit the semantic
 model as text rather than only through Power BI Desktop's UI. See
-[architecture.md](architecture.md) and PLAN.md ("Power BI development
-workflow") for why the split is: semantic model (tables, relationships,
-DAX) as text, visual layout by hand in Desktop.
+[architecture.md](architecture.md) for why the split is, semantic model
+(tables, relationships, DAX) as text, visual layout by hand in Desktop.
 
 ## Getting the marts tables in
 
@@ -157,4 +156,5 @@ noted above, not just a claim about it.
 
 DAX measures over `fct_reserve_results` (starting with the constraint
 above), then the What-If scenario-explorer page, then visual layout in
-Desktop. See PLAN.md for the live list.
+Desktop. See [dashboard-design.md](dashboard-design.md)'s "Suggested build
+order" for the live list.

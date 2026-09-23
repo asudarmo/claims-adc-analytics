@@ -16,7 +16,8 @@ a single invocation. Whichever is chosen, every parameter used (plus the
 logged to fct_reserving_run_parameters, and results are appended to
 fct_reserve_results / fct_reinsurance_valuation rather than replacing
 them, so past runs stay comparable instead of overwriting each other. See
-engine/tracking.py and PLAN.md ("What-if analysis and experiment tracking").
+engine/tracking.py and docs/reserving-engine.md ("Every run is tracked, not
+overwritten").
 
 Every run gets its own run_id (one per trend source produced), and every
 invocation of this script gets its own invocation_id shared by whichever

@@ -1,7 +1,7 @@
 -- Grain: rating_group x accident_year x dev_age_months. The validated
--- cumulative-paid triangle - primary input to the standalone Python
--- reserving engine (see PLAN.md: the actuarial method chain lives there,
--- not in dbt).
+-- cumulative-paid triangle, primary input to the standalone Python
+-- reserving engine (see docs/architecture.md for why the actuarial method
+-- chain lives there, not in dbt).
 --
 -- Development age is evaluated at fixed calendar year-end diagonals
 -- (12/31/2020 ... 12/31/2025), same convention as the original workbook

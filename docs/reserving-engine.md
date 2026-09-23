@@ -51,7 +51,7 @@ capability to any data source at all.
 **A real gotcha worth being deliberate about**: `is_promoted` lives on
 `dim_reserving_run`, not on the other three tables, so dropping and
 recreating just one of them (as the `booked_method` change did to
-`fct_reinsurance_valuation`, see `PLAN.md`) leaves the promoted flag
+`fct_reinsurance_valuation`) leaves the promoted flag
 pointing at a `run_id` that table no longer has any rows for, since the
 rebuilt table only contains whatever's been appended since. The other
 tables keep working fine (they weren't touched), so the break shows up

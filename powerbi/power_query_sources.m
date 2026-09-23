@@ -12,15 +12,12 @@
 //
 // EACH TABLE QUERY USES PostgreSQL.Database(...)'s documented `Query`
 // option (a plain SQL string) rather than the connector's schema/table
-// navigation syntax. This was a deliberate choice: the exact field names
+// navigation syntax. This was a deliberate choice, the exact field names
 // used to index into that navigation table (e.g. whether it's
 // Source{[Schema="marts",Item="dim_claim"]} or some other shape) aren't
 // something that could be verified without a working Power BI Desktop
 // install to test against, whereas every SQL string below has been run
-// directly against the live database and confirmed to return rows. See
-// PLAN.md ("What-if analysis and experiment tracking" / the .pbip
-// scaffold discussion) for the broader reasoning about what can safely be
-// hand-authored here versus what needs Desktop's own verification.
+// directly against the live database and confirmed to return rows.
 //
 // HOW TO USE
 // 1. In Power BI Desktop: Home > Transform Data > New Source > Blank Query.

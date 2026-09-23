@@ -1,10 +1,10 @@
 """
 Run identity and parameter logging for the reserving engine, an
 MLflow-style record of every recompute rather than each one silently
-overwriting the last. See docs/reserving-engine.md and PLAN.md ("What-if
-analysis and experiment tracking") for the full design and why this is
-Python-owned rather than a dbt model (a dbt table materialization would be
-dropped and recreated on every dbt run, wiping the accumulated history).
+overwriting the last. See docs/reserving-engine.md ("Every run is tracked,
+not overwritten") for the full design and why this is Python-owned rather
+than a dbt model (a dbt table materialization would be dropped and
+recreated on every dbt run, wiping the accumulated history).
 """
 from datetime import datetime, timezone
 

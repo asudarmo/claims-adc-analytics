@@ -7,8 +7,8 @@ trend is something the historical claims can speak to directly.
 
 This is an alternative trend_source ("Estimated"), not a replacement for
 the assumed one ("Assumed") - engine/main.py can run either, or both as
-separate tracked runs, see PLAN.md ("What-if analysis and experiment
-tracking").
+separate tracked runs, see docs/reserving-engine.md ("Assumed vs estimated
+loss trend").
 """
 import numpy as np
 import pandas as pd

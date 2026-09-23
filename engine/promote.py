@@ -7,7 +7,8 @@ engine.main: promoting is a fast, reviewed decision (flip a flag), not a
 recompute, and keeping it separate means it can be wired into the same
 Power Query "Run Python script" trigger as the recompute, just pointed at
 this script instead, with the target run_id coming from a Power BI
-parameter. See PLAN.md ("What-if analysis and experiment tracking").
+parameter. See docs/reserving-engine.md ("Every run is tracked, not
+overwritten").
 
 Run: python -m engine.promote <run_id>
 """

@@ -3,9 +3,8 @@
 Ideation for the report layer, for you to build from in Power BI Desktop.
 The visuals and page layout aren't built yet, this is still reference
 material for that part, but the DAX measures listed under each page now
-are built, living in `_measures.tmdl`, see `PLAN.md` for when. A suggested
-build order for the visuals themselves is at the end if you want to
-prioritise.
+are built, living in `_measures.tmdl`. A suggested build order for the
+visuals themselves is at the end if you want to prioritise.
 
 ## Design principles to carry across every page
 
@@ -196,14 +195,13 @@ checking the underlying data, not just the modelled output.
   built, and remain optional, not currently in the data model as their
   own table, would need either a DAX measure recomputing them or a small
   new engine/dbt output if that gets fiddly in DAX, deliberately deferred
-  in favour of Pages 6 and 8 for now (see `PLAN.md`).
+  in favour of Pages 6 and 8 for now.
 
 ## Page 4: Stress scenario and scenario explorer
 
 **Purpose:** the base-vs-extension comparison the original coursework
 asked for, plus the interactive what-if piece that was the whole reason
-for keeping the extension formulas simple enough to reimplement in DAX
-(see PLAN.md, "What-if analysis and experiment tracking").
+for keeping the extension formulas simple enough to reimplement in DAX.
 
 - Clustered or waterfall chart: Reserve, Base vs Extension, by method.
 - Table: same comparison broken out by rating group.
@@ -421,7 +419,7 @@ promoted one.
 
 **Purpose:** the page that would eventually carry the FCA Consumer Duty
 KPIs and double as the Row-Level Security demo once `dim_claims_handler`
-roles are wired up (see PLAN.md, "Regulatory/compliance features").
+roles are wired up.
 
 - KPI cards: claim count, average severity, closure rate, by rating group.
 - A time-to-settle distribution (close_date minus report_date), e.g. a
