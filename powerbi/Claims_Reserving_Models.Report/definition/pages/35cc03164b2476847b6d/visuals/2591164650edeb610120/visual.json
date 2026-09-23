@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
-  "name": "e92a92ea4ada185ad1c5",
+  "name": "2591164650edeb610120",
   "position": {
-    "x": 796,
-    "y": 326,
-    "z": 10000,
+    "x": 622,
+    "y": 716,
+    "z": 10002,
     "height": 364,
-    "width": 568,
-    "tabOrder": 10000
+    "width": 650,
+    "tabOrder": 10002
   },
   "visual": {
     "visualType": "deneb7E15AEF80B9E4D4F8E12924291ECE89A",
@@ -23,11 +23,11 @@
                       "Entity": "fct_claim"
                     }
                   },
-                  "Property": "open_claim_age_days"
+                  "Property": "time_to_settle_days"
                 }
               },
-              "queryRef": "Sum(fct_claim.open_claim_age_days)",
-              "nativeQueryRef": "open_claim_age_days"
+              "queryRef": "Sum(fct_claim.time_to_settle_days)",
+              "nativeQueryRef": "time_to_settle_days"
             },
             {
               "field": {
@@ -58,7 +58,7 @@
                         "Entity": "fct_claim"
                       }
                     },
-                    "Property": "open_claim_age_days"
+                    "Property": "time_to_settle_days"
                   }
                 },
                 "Function": 0
@@ -84,14 +84,14 @@
             "jsonSpec": {
               "expr": {
                 "Literal": {
-                  "Value": "'{\n  \"data\": {\"name\": \"dataset\"},\n  \"transform\": [\n    {\"filter\": \"datum.open_claim_age_days != null\"},\n    {\n      \"density\": \"open_claim_age_days\",\n      \"groupby\": [\"rating_group\"],\n      \"as\": [\"age\", \"density\"]\n    }\n  ],\n  \"mark\": {\n    \"type\": \"area\",\n    \"interpolate\": \"monotone\",\n    \"fillOpacity\": 0.5,\n    \"stroke\": \"white\",\n    \"strokeWidth\": 1\n  },\n  \"width\": 500,\n  \"height\": 50,\n  \"encoding\": {\n    \"x\": {\"field\": \"age\", \"type\": \"quantitative\", \"title\": \"\"},\n    \"y\": {\n      \"field\": \"density\",\n      \"type\": \"quantitative\",\n      \"axis\": null,\n      \"scale\": {\"range\": [25, -60]}\n    },\n    \"row\": {\n      \"field\": \"rating_group\",\n      \"type\": \"nominal\",\n      \"title\": null,\n      \"spacing\": 0,\n      \"header\": {\"labelAngle\": 0, \"labelAlign\": \"left\", \"labelPadding\": 10}\n    },\n    \"fill\": {\"field\": \"rating_group\", \"type\": \"nominal\", \"legend\": null}\n  },\n  \"config\": {\n    \"view\": {\"stroke\": null},\n    \"axis\": {\"domain\": false}\n  }\n}'"
+                  "Value": "'{\n  \"data\": {\"name\": \"dataset\"},\n  \"transform\": [\n    {\"filter\": \"datum.time_to_settle_days != null\"},\n    {\n      \"density\": \"time_to_settle_days\",\n      \"groupby\": [\"rating_group\"],\n      \"as\": [\"value\", \"density\"]\n    }\n  ],\n  \"mark\": {\n    \"type\": \"area\",\n    \"interpolate\": \"monotone\",\n    \"fillOpacity\": 1.0,\n    \"stroke\": \"white\",\n    \"strokeWidth\": 1\n  },\n  \"width\": 500,\n  \"height\": 40,\n  \"encoding\": {\n    \"x\": {\"field\": \"value\", \"type\": \"quantitative\", \"title\": \"\"},\n    \"y\": {\n      \"field\": \"density\",\n      \"type\": \"quantitative\",\n      \"axis\": null,\n      \"scale\": {\"range\": [25, -60]}\n    },\n    \"row\": {\n      \"field\": \"rating_group\",\n      \"type\": \"nominal\",\n      \"title\": null,\n      \"spacing\": 0,\n      \"header\": {\"labelAngle\": 0, \"labelAlign\": \"left\", \"labelPadding\": 10}\n    },\n    \"fill\": {\"field\": \"rating_group\", \"type\": \"nominal\", \"legend\": null}\n  },\n  \"config\": {\n    \"view\": {\"stroke\": null},\n    \"axis\": {\"domain\": false}\n  }\n}'"
                 }
               }
             },
             "jsonConfig": {
               "expr": {
                 "Literal": {
-                  "Value": "'{}'"
+                  "Value": "'{\n  \"view\": {\n    \"stroke\": \"transparent\"\n  },\n  \"font\": \"Segoe UI, wf_segoe-ui_normal, helvetica, arial, sans-serif\",\n  \"arc\": {},\n  \"area\": {\n    \"line\": true,\n    \"opacity\": 1\n  },\n  \"bar\": {},\n  \"line\": {\n    \"strokeWidth\": 3,\n    \"strokeCap\": \"round\",\n    \"strokeJoin\": \"round\"\n  },\n  \"point\": {\n    \"filled\": true,\n    \"size\": 75\n  },\n  \"rect\": {},\n  \"text\": {\n    \"font\": \"Segoe UI, wf_segoe-ui_normal, helvetica, arial, sans-serif\",\n    \"fontSize\": 12,\n    \"fill\": \"#616161\"\n  },\n  \"axis\": {\n    \"ticks\": false,\n    \"grid\": false,\n    \"domain\": false,\n    \"labelColor\": \"#616161\",\n    \"labelFontSize\": 12,\n    \"titleFont\": \"din, wf_standard-font, helvetica, arial, sans-serif\",\n    \"titleColor\": \"#242424\",\n    \"titleFontSize\": 16,\n    \"titleFontWeight\": \"normal\"\n  },\n  \"axisQuantitative\": {\n    \"tickCount\": 3,\n    \"grid\": true,\n    \"gridColor\": \"#C7C7C7\",\n    \"gridDash\": [\n      1,\n      5\n    ],\n    \"labelFlush\": false\n  },\n  \"axisX\": {\n    \"labelPadding\": 5\n  },\n  \"axisY\": {\n    \"labelPadding\": 10\n  },\n  \"header\": {\n    \"titleFont\": \"din, wf_standard-font, helvetica, arial, sans-serif\",\n    \"titleFontSize\": 16,\n    \"titleColor\": \"#242424\",\n    \"labelFont\": \"Segoe UI, wf_segoe-ui_normal, helvetica, arial, sans-serif\",\n    \"labelFontSize\": 13.333333333333332,\n    \"labelColor\": \"#616161\"\n  },\n  \"legend\": {\n    \"titleFont\": \"Segoe UI, wf_segoe-ui_normal, helvetica, arial, sans-serif\",\n    \"titleFontWeight\": \"bold\",\n    \"titleColor\": \"#616161\",\n    \"labelFont\": \"Segoe UI, wf_segoe-ui_normal, helvetica, arial, sans-serif\",\n    \"labelFontSize\": 13.333333333333332,\n    \"labelColor\": \"#616161\",\n    \"symbolType\": \"circle\",\n    \"symbolSize\": 75\n  }\n}'"
                 }
               }
             },
@@ -174,7 +174,7 @@
             "viewportWidth": {
               "expr": {
                 "Literal": {
-                  "Value": "534D"
+                  "Value": "616D"
                 }
               }
             }
@@ -202,7 +202,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Density of Open Claim Age (Days)'"
+                  "Value": "'Density of Time-To Settle (Days) (Days)'"
                 }
               }
             }

@@ -1,0 +1,249 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "3a50d9ebce147c47a2b5",
+  "position": {
+    "x": 10,
+    "y": 254,
+    "z": 2000,
+    "height": 574,
+    "width": 912,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "deneb7E15AEF80B9E4D4F8E12924291ECE89A",
+    "query": {
+      "queryState": {
+        "dataset": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Booked Reserve (ADC)"
+                }
+              },
+              "queryRef": "_measures.Booked Reserve (ADC)",
+              "nativeQueryRef": "booked",
+              "displayName": "booked"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Attachment (ADC)"
+                }
+              },
+              "queryRef": "_measures.Attachment (ADC)",
+              "nativeQueryRef": "attachment",
+              "displayName": "attachment"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Exhaustion (ADC)"
+                }
+              },
+              "queryRef": "_measures.Exhaustion (ADC)",
+              "nativeQueryRef": "exhaustion",
+              "displayName": "exhaustion"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Stressed Reserve (Assumed Stress)"
+                }
+              },
+              "queryRef": "_measures.Stressed Reserve (Assumed Stress)",
+              "nativeQueryRef": "stressed",
+              "displayName": "stressed"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_reinsurance_valuation"
+                    }
+                  },
+                  "Property": "booked_method"
+                }
+              },
+              "queryRef": "fct_reinsurance_valuation.booked_method",
+              "nativeQueryRef": "method",
+              "displayName": "method"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_measures"
+                  }
+                },
+                "Property": "Booked Reserve (ADC)"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "vega": [
+        {
+          "properties": {
+            "provider": {
+              "expr": {
+                "Literal": {
+                  "Value": "'vegaLite'"
+                }
+              }
+            },
+            "jsonSpec": {
+              "expr": {
+                "Literal": {
+                  "Value": "'{\n  \"data\": {\"name\": \"dataset\"},\n  \"facet\": {\n    \"row\": {\n      \"field\": \"method\",\n      \"type\": \"nominal\",\n      \"title\": null,\n      \"sort\": [\"BornhuetterFerguson\", \"ChainLadder\", \"ExpectedClaims\"],\n      \"header\": {\"labelAngle\": 0, \"labelAlign\": \"left\", \"labelFontWeight\": \"bold\"}\n    }\n  },\n  \"spec\": {\n    \"width\": 500,\n    \"height\": 140,\n    \"transform\": [\n      {\"calculate\": \"0\", \"as\": \"zero\"},\n      {\"calculate\": \"''Booked '' + format(datum.booked, '',.2s'')\", \"as\": \"booked_label\"},\n      {\"calculate\": \"''Attachment '' + format(datum.attachment, '',.2s'')\", \"as\": \"attachment_label\"},\n      {\"calculate\": \"''Exhaustion '' + format(datum.exhaustion, '',.2s'')\", \"as\": \"exhaustion_label\"},\n      {\"calculate\": \"''Stressed '' + format(datum.stressed, '',.2s'')\", \"as\": \"stressed_label\"}\n    ],\n    \"layer\": [\n      {\n        \"mark\": {\"type\": \"bar\", \"color\": \"#d9d9d9\"},\n        \"encoding\": {\n          \"x\": {\"field\": \"zero\", \"type\": \"quantitative\", \"title\": \"Reserve (GBP)\"},\n          \"x2\": {\"field\": \"booked\"},\n          \"y\": {\"value\": 55}, \"y2\": {\"value\": 85},\n          \"opacity\": {\"condition\": {\"test\": \"datum.stressed__highlight == null\", \"value\": 0.3}, \"value\": 1}\n        }\n      },\n      {\n        \"mark\": {\"type\": \"bar\", \"color\": \"#bfbfbf\"},\n        \"encoding\": {\n          \"x\": {\"field\": \"booked\", \"type\": \"quantitative\"},\n          \"x2\": {\"field\": \"attachment\"},\n          \"y\": {\"value\": 55}, \"y2\": {\"value\": 85},\n          \"opacity\": {\"condition\": {\"test\": \"datum.stressed__highlight == null\", \"value\": 0.3}, \"value\": 1}\n        }\n      },\n      {\n        \"mark\": {\"type\": \"bar\", \"color\": \"#8c9eb6\"},\n        \"encoding\": {\n          \"x\": {\"field\": \"attachment\", \"type\": \"quantitative\"},\n          \"x2\": {\"field\": \"exhaustion\"},\n          \"y\": {\"value\": 55}, \"y2\": {\"value\": 85},\n          \"opacity\": {\"condition\": {\"test\": \"datum.stressed__highlight == null\", \"value\": 0.3}, \"value\": 1}\n        }\n      },\n      {\n        \"mark\": {\"type\": \"bar\", \"color\": \"#1a3d6d\"},\n        \"encoding\": {\n          \"x\": {\"field\": \"zero\", \"type\": \"quantitative\"},\n          \"x2\": {\"field\": \"stressed\"},\n          \"y\": {\"value\": 65}, \"y2\": {\"value\": 75},\n          \"color\": {\n            \"condition\": {\"test\": \"datum.stressed__highlight == null\", \"value\": \"#1a3d6d\"},\n            \"value\": \"#B8860B\"\n          }\n        }\n      },\n      {\n        \"mark\": {\"type\": \"rule\", \"color\": \"black\", \"strokeWidth\": 1, \"strokeDash\": [2, 2]},\n        \"encoding\": {\"x\": {\"field\": \"booked\", \"type\": \"quantitative\"}, \"y\": {\"value\": 40}, \"y2\": {\"value\": 85}}\n      },\n      {\n        \"mark\": {\"type\": \"text\", \"align\": \"center\", \"fontSize\": 12, \"fontWeight\": \"bold\"},\n        \"encoding\": {\n          \"x\": {\"field\": \"booked\", \"type\": \"quantitative\"}, \"y\": {\"value\": 40},\n          \"text\": {\"field\": \"booked_label\", \"type\": \"nominal\"}\n        }\n      },\n      {\n        \"mark\": {\"type\": \"rule\", \"color\": \"black\", \"strokeWidth\": 1, \"strokeDash\": [2, 2]},\n        \"encoding\": {\"x\": {\"field\": \"attachment\", \"type\": \"quantitative\"}, \"y\": {\"value\": 25}, \"y2\": {\"value\": 85}}\n      },\n      {\n        \"mark\": {\"type\": \"text\", \"align\": \"center\", \"fontSize\": 12, \"fontWeight\": \"bold\"},\n        \"encoding\": {\n          \"x\": {\"field\": \"attachment\", \"type\": \"quantitative\"}, \"y\": {\"value\": 25},\n          \"text\": {\"field\": \"attachment_label\", \"type\": \"nominal\"}\n        }\n      },\n      {\n        \"mark\": {\"type\": \"rule\", \"color\": \"black\", \"strokeWidth\": 1, \"strokeDash\": [2, 2]},\n        \"encoding\": {\"x\": {\"field\": \"exhaustion\", \"type\": \"quantitative\"}, \"y\": {\"value\": 10}, \"y2\": {\"value\": 85}}\n      },\n      {\n        \"mark\": {\"type\": \"text\", \"align\": \"center\", \"fontSize\": 12, \"fontWeight\": \"bold\"},\n        \"encoding\": {\n          \"x\": {\"field\": \"exhaustion\", \"type\": \"quantitative\"}, \"y\": {\"value\": 10},\n          \"text\": {\"field\": \"exhaustion_label\", \"type\": \"nominal\"}\n        }\n      },\n      {\n        \"mark\": {\"type\": \"text\", \"align\": \"center\", \"fontSize\": 12, \"fontWeight\": \"bold\", \"color\": \"#1a3d6d\"},\n        \"encoding\": {\n          \"x\": {\"field\": \"stressed\", \"type\": \"quantitative\"}, \"y\": {\"value\": 105},\n          \"text\": {\"field\": \"stressed_label\", \"type\": \"nominal\"},\n          \"color\": {\n            \"condition\": {\"test\": \"datum.stressed__highlight == null\", \"value\": \"#1a3d6d\"},\n            \"value\": \"#B8860B\"\n          }\n        }\n      }\n    ]\n  },\n  \"resolve\": {\"scale\": {\"x\": \"shared\"}},\n  \"config\": {\"view\": {\"stroke\": null}, \"axis\": {\"grid\": false}}\n}'"
+                }
+              }
+            },
+            "jsonConfig": {
+              "expr": {
+                "Literal": {
+                  "Value": "'{\n  \"view\": {\n    \"stroke\": \"transparent\"\n  },\n  \"font\": \"Segoe UI, wf_segoe-ui_normal, helvetica, arial, sans-serif\",\n  \"arc\": {},\n  \"area\": {\n    \"line\": true,\n    \"opacity\": 0.6\n  },\n  \"bar\": {},\n  \"line\": {\n    \"strokeWidth\": 3,\n    \"strokeCap\": \"round\",\n    \"strokeJoin\": \"round\"\n  },\n  \"point\": {\n    \"filled\": true,\n    \"size\": 75\n  },\n  \"rect\": {},\n  \"text\": {\n    \"font\": \"Segoe UI, wf_segoe-ui_normal, helvetica, arial, sans-serif\",\n    \"fontSize\": 12,\n    \"fill\": \"#616161\"\n  },\n  \"axis\": {\n    \"ticks\": false,\n    \"grid\": false,\n    \"domain\": false,\n    \"labelColor\": \"#616161\",\n    \"labelFontSize\": 12,\n    \"titleFont\": \"din, wf_standard-font, helvetica, arial, sans-serif\",\n    \"titleColor\": \"#242424\",\n    \"titleFontSize\": 16,\n    \"titleFontWeight\": \"normal\"\n  },\n  \"axisQuantitative\": {\n    \"tickCount\": 3,\n    \"grid\": true,\n    \"gridColor\": \"#C7C7C7\",\n    \"gridDash\": [\n      1,\n      5\n    ],\n    \"labelFlush\": false\n  },\n  \"axisX\": {\n    \"labelPadding\": 5\n  },\n  \"axisY\": {\n    \"labelPadding\": 10\n  },\n  \"header\": {\n    \"titleFont\": \"din, wf_standard-font, helvetica, arial, sans-serif\",\n    \"titleFontSize\": 16,\n    \"titleColor\": \"#242424\",\n    \"labelFont\": \"Segoe UI, wf_segoe-ui_normal, helvetica, arial, sans-serif\",\n    \"labelFontSize\": 13.333333333333332,\n    \"labelColor\": \"#616161\"\n  },\n  \"legend\": {\n    \"titleFont\": \"Segoe UI, wf_segoe-ui_normal, helvetica, arial, sans-serif\",\n    \"titleFontWeight\": \"bold\",\n    \"titleColor\": \"#616161\",\n    \"labelFont\": \"Segoe UI, wf_segoe-ui_normal, helvetica, arial, sans-serif\",\n    \"labelFontSize\": 13.333333333333332,\n    \"labelColor\": \"#616161\",\n    \"symbolType\": \"circle\",\n    \"symbolSize\": 75\n  }\n}'"
+                }
+              }
+            },
+            "enableTooltips": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "enableContextMenu": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "enableContextMenuSelector": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "enableHighlight": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "enableSelection": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "selectionMaxDataPoints": {
+              "expr": {
+                "Literal": {
+                  "Value": "50D"
+                }
+              }
+            },
+            "selectionMode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'simple'"
+                }
+              }
+            },
+            "version": {
+              "expr": {
+                "Literal": {
+                  "Value": "'6.4.3'"
+                }
+              }
+            },
+            "renderMode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'canvas'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "stateManagement": [
+        {
+          "properties": {
+            "denebMetaVersion": {
+              "expr": {
+                "Literal": {
+                  "Value": "'2'"
+                }
+              }
+            },
+            "viewportHeight": {
+              "expr": {
+                "Literal": {
+                  "Value": "542D"
+                }
+              }
+            },
+            "viewportWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "878D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "developer": [
+        {
+          "properties": {
+            "version": {
+              "expr": {
+                "Literal": {
+                  "Value": "'2.0.0.0'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

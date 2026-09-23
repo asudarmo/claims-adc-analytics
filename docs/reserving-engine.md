@@ -48,6 +48,20 @@ from a Power BI parameter. DAX cannot do this itself under any
 circumstance: it's a read-only calculation language with no write-back
 capability to any data source at all.
 
+**A real gotcha worth being deliberate about**: `is_promoted` lives on
+`dim_reserving_run`, not on the other three tables, so dropping and
+recreating just one of them (as the `booked_method` change did to
+`fct_reinsurance_valuation`, see `PLAN.md`) leaves the promoted flag
+pointing at a `run_id` that table no longer has any rows for, since the
+rebuilt table only contains whatever's been appended since. The other
+tables keep working fine (they weren't touched), so the break shows up
+only on whichever page reads the rebuilt one, every KPI on it goes blank
+with no error. The fix is a fresh `engine.promote(run_id)` against a run
+that actually has rows in every table, not a change to any DAX measure,
+the measures are already correct, they just have nothing to find. Any
+future drop-and-recreate of one of these four tables should end with a
+re-promotion, not be assumed to just work.
+
 ## The method chain
 
 For each rating group, per accident year.

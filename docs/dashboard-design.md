@@ -241,10 +241,14 @@ brief, what does the cover protect, and at what point does it stop.
   Recovery, Net Benefit, from `fct_reinsurance_valuation` filtered to
   scenario = "Assumed stress" and whichever `booked_method` the slicer
   above has selected.
-- A bullet-chart-style visual (or a horizontal stacked bar built to look
-  like one): booked reserve, attachment point, exhaustion point, and the
-  stressed reserve all on one scale, so it's visually obvious whether the
-  stress scenario is inside, at, or past exhaustion.
+- A bullet-chart-style visual: booked reserve, attachment point,
+  exhaustion point, and the stressed reserve all on one scale, so it's
+  visually obvious whether the stress scenario is inside, at, or past
+  exhaustion. Built showing **all three booked methods at once**, one row
+  each, rather than the single method the `booked_method` slicer controls
+  elsewhere on the page, comparing methods side by side turned out to be
+  more useful here than drilling into one at a time, and the page had
+  visible empty space to use well. See "Built" below for how.
 - KPI card: Breakeven Inflation Rate, from the "Breakeven" scenario row
   (same `booked_method` selection), with a comparison against the assumed
   shock. Worth calling out explicitly in a text box or card subtitle: for
@@ -262,6 +266,107 @@ brief, what does the cover protect, and at what point does it stop.
   instead. None of them filter `booked_method`, that's left to the page's
   slicer, exactly the direct pass-throughs this table was designed for, no
   new DAX logic beyond the standard promoted-run filter pattern.
+- **Built**, and it's the one visual on this dashboard with no off-the-shelf
+  equivalent, no native Power BI chart type or free AppSource visual draws
+  "several labelled reference points against a measure bar, faceted by
+  category," so this is a hand-written Deneb (Vega-Lite) spec, `booked`,
+  `attachment`, `exhaustion`, `stressed`, and `booked_method` (renamed
+  `method`) fed in as Values, `row`-faceted by `method` with a shared
+  x-scale so all three are directly comparable.
+  - **A real rendering bug caught from the first attempt**: bar marks
+    without an explicit vertical position don't reliably centre and
+    stack the way a mark's `height` property alone suggests they should,
+    the first render showed three background bands and the stressed
+    overlay bar as one smeared, indistinguishable block. Fixed by giving
+    every bar layer an explicit pixel `y`/`y2` rather than relying on
+    default anchoring, deterministic once specified, not something worth
+    guessing at again.
+  - **Two rounds of label placement fixes**: labels for `booked`,
+    `attachment`, and `exhaustion` originally shared one vertical
+    position and collided whenever two threshold values were close
+    together (they usually are, attachment is only a few percent above
+    booked reserve). Fixed by staggering each label and its dotted rule
+    at a different fixed height, a staircase rather than a single row, so
+    separation holds regardless of how close the underlying values are.
+  - **Cross-highlighting from a Table instead of the page's slicer**,
+    confirmed against Microsoft's own documentation before building it,
+    a native Slicer visual can only ever drive a Filter interaction,
+    never Highlight, that's a genuine Power BI platform restriction
+    specific to slicers, not a Deneb limitation. A plain Table of
+    `booked_method` can drive Highlight, so that's the interaction
+    source, the slicer stays for the KPI cards (which need one method
+    filtered), the table drives the bullet chart (which needs all three
+    visible, just with one emphasised).
+  - Deneb's **"Expose Cross-Highlight Values for Measures"** setting
+    (Vega > Power BI Interactivity) adds `[measure]__highlight` and
+    `[measure]__highlightStatus` companion fields per measure without
+    disturbing the real values, essential, since without it Power BI's
+    default highlight behaviour was substituting the underlying
+    `booked`/`attachment`/`exhaustion`/`stressed` values themselves for
+    non-highlighted rows, collapsing their bars to nothing rather than
+    dimming them. In practice, `datum.stressed__highlight == null`
+    (true exactly for rows excluded by an active highlight elsewhere)
+    turned out simpler and more reliable than `__highlightStatus` for
+    this spec.
+  - **Opacity and colour split into two different jobs** after the first
+    highlighting pass made the two non-selected methods too faded to
+    read their own numbers against. Opacity now only dims the three
+    background context bands; the stressed bar, the dotted rules, and
+    every label stay at full opacity always, so all three methods' exact
+    figures stay legible regardless of which one is selected. The
+    selected method's stressed bar and its label switch to amber
+    (`#B8860B`, chosen over red specifically to avoid an unintended
+    "this one is bad" reading on an exhaustion chart) instead, so
+    selection is communicated by colour, not by hiding the other two.
+  - **A real bug from swapping the slicer for a Table**: switching
+    `booked_method`'s selection mechanism from a single-select slicer to
+    a Table (needed for cross-highlighting, see above) quietly removed
+    the guarantee that exactly one method is always selected. A slicer
+    in single-select mode with a default can never be "empty", a Table's
+    resting state, before anyone clicks a row, has nothing selected at
+    all, and in that state the nine ADC measures were summing all three
+    booked methods' dollar figures together, precisely the failure mode
+    this page's own design principle already named ("leaving
+    `booked_method` unfiltered would sum three different reserving
+    bases' dollar figures together"), it just needed the slicer's
+    implicit guarantee removed to actually surface. Tried returning
+    blank in that case first (`IF(HASONEVALUE(...), <calc>)` with no
+    else), technically correct, but Power BI can't set a bookmark as a
+    page's default view without a button or page-navigation trigger, so
+    the page would always open showing `--` on every KPI card until a
+    viewer clicked a row, a poor first impression for a page meant to be
+    the headline reinsurance view. Settled on resolving the effective
+    method once, in a `VAR`, falling back to `"BornhuetterFerguson"` (the
+    same default the slicer used to guarantee) whenever the Table's
+    selection isn't exactly one method, then filtering to that resolved
+    value in a single `CALCULATE`, rather than branching into two
+    near-duplicate `CALCULATE` blocks:
+    ```
+    VAR EffectiveMethod =
+        IF(
+            HASONEVALUE(fct_reinsurance_valuation[booked_method]),
+            SELECTEDVALUE(fct_reinsurance_valuation[booked_method]),
+            "BornhuetterFerguson"
+        )
+    RETURN
+        CALCULATE(
+            SUM(fct_reinsurance_valuation[booked_reserve]),
+            FILTER(fct_reinsurance_valuation,
+                fct_reinsurance_valuation[scenario] = "Assumed stress" &&
+                fct_reinsurance_valuation[booked_method] = EffectiveMethod
+            ),
+            FILTER(dim_reserving_run, 'dim_reserving_run'[is_promoted] = TRUE)
+        )
+    ```
+    Correctness no longer depends on any UI state at all, not a slicer
+    default, not a bookmark, the page opens on BornhuetterFerguson every
+    time and stays correct if a viewer deselects. One known, accepted
+    edge case, `HASONEVALUE` is false both when nothing is selected and
+    when more than one method is selected, so a hypothetical multi-select
+    would also silently fall back to BornhuetterFerguson rather than
+    showing a blended or blank result, not reachable with the Table's
+    current single-select behaviour, not worth engineering around
+    pre-emptively.
 
 ## Page 6: Data quality and validation
 
@@ -345,46 +450,6 @@ roles are wired up (see PLAN.md, "Regulatory/compliance features").
   knowing it duplicates `engine/main.py`'s `LATEST_YEAR = 2025` in a
   second place, Python and DAX don't share a constant, so if that ever
   changes both sides need updating by hand.
-- **Built**, and ended up richer than originally planned. The 3x3 KPI
-  grid, the age-bucket stacked column, and the "Claims per handler" chart
-  (now a combo, count of claims per handler as columns plus
-  `Sum(fct_claim[cumulative_paid])` as a line on a secondary axis, showing
-  handler workload and dollar exposure together) are all native Power BI
-  visuals as planned. Two things went beyond the original scope, driven
-  by wanting real distribution shapes rather than single-number averages:
-  - A new calculated column, `open_claim_age_days` on `fct_claim`
-    (`IF(status = "Open", DATEDIFF(report_date, [Valuation Date], DAY))`,
-    blank for closed claims), feeding two new charts that need row-level
-    detail rather than a pre-aggregated measure.
-  - Two external, free, certified custom visuals: the **Violin Plot**
-    visual ([AppSource](https://appsource.microsoft.com/en-us/product/power-bi-visuals/wa104381947),
-    [source](https://github.com/dm-p/powerbi-visuals-violin-plot)) for a
-    violin-plus-box view of `time_to_settle_days` by rating group, and
-    **Deneb** ([AppSource](https://marketplace.microsoft.com/en-us/product/power-bi-visuals/coacervolimited1596856650797.deneb),
-    [source](https://github.com/deneb-viz/deneb)), a Vega-Lite based
-    visual, for a smoothed density chart of `time_to_settle_days` and a
-    ridgeline (overlapping density) chart of `open_claim_age_days` by
-    rating group, both authored as hand-written Vega-Lite JSON specs
-    rather than a native Power BI chart type. Worth checking once this
-    report is opened somewhere else, whether a custom visual travels with
-    a `.pbip` project via git or needs re-adding from AppSource on a
-    fresh clone, not yet confirmed either way.
-  - The age-bucket stacked column and the new ridgeline were kept
-    side by side rather than one replacing the other, a deliberate call,
-    the stacked column gives an exact, quotable percentage per bucket,
-    the ridgeline gives the true distribution shape. Considered adding a
-    small KPI card for "% of open claims aged 12+ months" per group
-    alongside the ridgeline instead, decided against it, favouring fewer
-    cards over one more precise number.
-  - **A real finding worth calling out directly on the page**: the
-    ridgeline shows Group C's open claims aren't just more numerous
-    relative to its book, they take structurally longer to resolve, tail
-    extending out past 2,000 days versus Group A's distribution mostly
-    wound down by around 1,000. Same "Group C is thin, volatile, and slow
-    to resolve" pattern already visible in the reserving method spread
-    and the estimated severity trend, now confirmed a third time from
-    claims-operations data specifically, on an entirely different data
-    source and axis.
 
 ## Suggested build order, if prioritising
 

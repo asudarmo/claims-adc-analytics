@@ -1,0 +1,184 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "0c80a049a37077e43318",
+  "position": {
+    "x": 264,
+    "y": 20,
+    "z": 1000,
+    "height": 208,
+    "width": 1420,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Booked Reserve (ADC)"
+                }
+              },
+              "queryRef": "_measures.Booked Reserve (ADC)",
+              "nativeQueryRef": "Booked Reserve",
+              "displayName": "Booked Reserve"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Attachment (ADC)"
+                }
+              },
+              "queryRef": "_measures.Attachment (ADC)",
+              "nativeQueryRef": "Attachment",
+              "displayName": "Attachment"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Exhaustion (ADC)"
+                }
+              },
+              "queryRef": "_measures.Exhaustion (ADC)",
+              "nativeQueryRef": "Exhaustion",
+              "displayName": "Exhaustion"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "ADC Limit"
+                }
+              },
+              "queryRef": "_measures.ADC Limit",
+              "nativeQueryRef": "ADC Limit"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Premium (ADC)"
+                }
+              },
+              "queryRef": "_measures.Premium (ADC)",
+              "nativeQueryRef": "ADC Premium",
+              "displayName": "ADC Premium"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Recovery (Assumed Stress)"
+                }
+              },
+              "queryRef": "_measures.Recovery (Assumed Stress)",
+              "nativeQueryRef": "Recovery",
+              "displayName": "Recovery"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_measures"
+                    }
+                  },
+                  "Property": "Net Benefit (Assumed Stress)"
+                }
+              },
+              "queryRef": "_measures.Net Benefit (Assumed Stress)",
+              "nativeQueryRef": "Net Benefit",
+              "displayName": "Net Benefit"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_measures"
+                  }
+                },
+                "Property": "Booked Reserve (ADC)"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "smallMultiplesLayout": [
+        {
+          "properties": {
+            "headerPosition": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Top'"
+                }
+              }
+            },
+            "titleOrientation": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "smallMultiplesHeader": [
+        {
+          "properties": {
+            "horizontalAlignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

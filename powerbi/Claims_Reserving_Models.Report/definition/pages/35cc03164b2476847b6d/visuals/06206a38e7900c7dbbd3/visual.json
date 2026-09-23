@@ -1,0 +1,215 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "06206a38e7900c7dbbd3",
+  "position": {
+    "x": 782,
+    "y": 326,
+    "z": 10001,
+    "height": 364,
+    "width": 568,
+    "tabOrder": 10001
+  },
+  "visual": {
+    "visualType": "deneb7E15AEF80B9E4D4F8E12924291ECE89A",
+    "query": {
+      "queryState": {
+        "dataset": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_claim"
+                    }
+                  },
+                  "Property": "open_claim_age_days"
+                }
+              },
+              "queryRef": "Sum(fct_claim.open_claim_age_days)",
+              "nativeQueryRef": "open_claim_age_days"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_rating_group"
+                    }
+                  },
+                  "Property": "rating_group"
+                }
+              },
+              "queryRef": "dim_rating_group.rating_group",
+              "nativeQueryRef": "rating_group"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "fct_claim"
+                      }
+                    },
+                    "Property": "open_claim_age_days"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "vega": [
+        {
+          "properties": {
+            "provider": {
+              "expr": {
+                "Literal": {
+                  "Value": "'vegaLite'"
+                }
+              }
+            },
+            "jsonSpec": {
+              "expr": {
+                "Literal": {
+                  "Value": "'{\n  \"data\": {\"name\": \"dataset\"},\n  \"transform\": [\n    {\"filter\": \"datum.open_claim_age_days != null\"},\n    {\n      \"density\": \"open_claim_age_days\",\n      \"groupby\": [\"rating_group\"],\n      \"as\": [\"age\", \"density\"]\n    }\n  ],\n  \"mark\": {\n    \"type\": \"area\",\n    \"interpolate\": \"monotone\",\n    \"fillOpacity\": 1,\n    \"stroke\": \"white\",\n    \"strokeWidth\": 1\n  },\n  \"width\": 500,\n  \"height\": 50,\n  \"encoding\": {\n    \"x\": {\"field\": \"age\", \"type\": \"quantitative\", \"title\": \"\"},\n    \"y\": {\n      \"field\": \"density\",\n      \"type\": \"quantitative\",\n      \"axis\": null,\n      \"scale\": {\"range\": [25, -60]}\n    },\n    \"row\": {\n      \"field\": \"rating_group\",\n      \"type\": \"nominal\",\n      \"title\": null,\n      \"spacing\": 0,\n      \"header\": {\"labelAngle\": 0, \"labelAlign\": \"left\", \"labelPadding\": 10}\n    },\n    \"fill\": {\"field\": \"rating_group\", \"type\": \"nominal\", \"legend\": null}\n  },\n  \"config\": {\n    \"view\": {\"stroke\": null},\n    \"axis\": {\"domain\": false}\n  }\n}'"
+                }
+              }
+            },
+            "jsonConfig": {
+              "expr": {
+                "Literal": {
+                  "Value": "'{\n  \"view\": {\n    \"stroke\": \"transparent\"\n  },\n  \"font\": \"Segoe UI, wf_segoe-ui_normal, helvetica, arial, sans-serif\",\n  \"arc\": {},\n  \"area\": {\n    \"line\": true,\n    \"opacity\": 1\n  },\n  \"bar\": {},\n  \"line\": {\n    \"strokeWidth\": 3,\n    \"strokeCap\": \"round\",\n    \"strokeJoin\": \"round\"\n  },\n  \"point\": {\n    \"filled\": true,\n    \"size\": 75\n  },\n  \"rect\": {},\n  \"text\": {\n    \"font\": \"Segoe UI, wf_segoe-ui_normal, helvetica, arial, sans-serif\",\n    \"fontSize\": 12,\n    \"fill\": \"#616161\"\n  },\n  \"axis\": {\n    \"ticks\": false,\n    \"grid\": false,\n    \"domain\": false,\n    \"labelColor\": \"#616161\",\n    \"labelFontSize\": 12,\n    \"titleFont\": \"din, wf_standard-font, helvetica, arial, sans-serif\",\n    \"titleColor\": \"#242424\",\n    \"titleFontSize\": 16,\n    \"titleFontWeight\": \"normal\"\n  },\n  \"axisQuantitative\": {\n    \"tickCount\": 3,\n    \"grid\": true,\n    \"gridColor\": \"#C7C7C7\",\n    \"gridDash\": [\n      1,\n      5\n    ],\n    \"labelFlush\": false\n  },\n  \"axisX\": {\n    \"labelPadding\": 5\n  },\n  \"axisY\": {\n    \"labelPadding\": 10\n  },\n  \"header\": {\n    \"titleFont\": \"din, wf_standard-font, helvetica, arial, sans-serif\",\n    \"titleFontSize\": 16,\n    \"titleColor\": \"#242424\",\n    \"labelFont\": \"Segoe UI, wf_segoe-ui_normal, helvetica, arial, sans-serif\",\n    \"labelFontSize\": 13.333333333333332,\n    \"labelColor\": \"#616161\"\n  },\n  \"legend\": {\n    \"titleFont\": \"Segoe UI, wf_segoe-ui_normal, helvetica, arial, sans-serif\",\n    \"titleFontWeight\": \"bold\",\n    \"titleColor\": \"#616161\",\n    \"labelFont\": \"Segoe UI, wf_segoe-ui_normal, helvetica, arial, sans-serif\",\n    \"labelFontSize\": 13.333333333333332,\n    \"labelColor\": \"#616161\",\n    \"symbolType\": \"circle\",\n    \"symbolSize\": 75\n  }\n}'"
+                }
+              }
+            },
+            "enableTooltips": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "enableContextMenu": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "enableContextMenuSelector": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "enableHighlight": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "enableSelection": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "selectionMaxDataPoints": {
+              "expr": {
+                "Literal": {
+                  "Value": "50D"
+                }
+              }
+            },
+            "selectionMode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'simple'"
+                }
+              }
+            },
+            "version": {
+              "expr": {
+                "Literal": {
+                  "Value": "'6.4.3'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "stateManagement": [
+        {
+          "properties": {
+            "denebMetaVersion": {
+              "expr": {
+                "Literal": {
+                  "Value": "'2'"
+                }
+              }
+            },
+            "viewportHeight": {
+              "expr": {
+                "Literal": {
+                  "Value": "296D"
+                }
+              }
+            },
+            "viewportWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "534D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "developer": [
+        {
+          "properties": {
+            "version": {
+              "expr": {
+                "Literal": {
+                  "Value": "'2.0.0.0'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Density of Open Claim Age (Days)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

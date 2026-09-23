@@ -1,0 +1,402 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "ADC Default",
+  "name": "a8a3eb35826b9bd3ee40",
+  "options": {
+    "targetVisualNames": [
+      "90559b412ee70bc82640"
+    ]
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "8c151134094c8d890a37",
+    "filters": {
+      "byExpr": [
+        {
+          "name": "61d586bf8d48ec28ec15",
+          "type": "Categorical",
+          "filter": {
+            "Version": 2,
+            "From": [
+              {
+                "Name": "a",
+                "Entity": "assumptions_by_group",
+                "Type": 0
+              }
+            ],
+            "Where": [
+              {
+                "Condition": {
+                  "Not": {
+                    "Expression": {
+                      "In": {
+                        "Expressions": [
+                          {
+                            "Column": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Source": "a"
+                                }
+                              },
+                              "Property": "rating_group"
+                            }
+                          }
+                        ],
+                        "Values": [
+                          [
+                            {
+                              "Literal": {
+                                "Value": "null"
+                              }
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "assumptions_by_group"
+                }
+              },
+              "Property": "rating_group"
+            }
+          },
+          "howCreated": 1
+        }
+      ]
+    },
+    "sections": {
+      "8c151134094c8d890a37": {
+        "visualContainers": {
+          "0c80a049a37077e43318": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "47448e401a94079e3d5e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_measures"
+                        }
+                      },
+                      "Property": "Booked Reserve (ADC)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "3435db67603d3887da26",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_measures"
+                        }
+                      },
+                      "Property": "Attachment (ADC)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "c50c9a989ca8a0772953",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_measures"
+                        }
+                      },
+                      "Property": "Exhaustion (ADC)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "904c1a08cbb47b080d7e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_measures"
+                        }
+                      },
+                      "Property": "ADC Limit"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "a6126894d331951e6132",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_measures"
+                        }
+                      },
+                      "Property": "Premium (ADC)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "33b2a7839edd9059eac3",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_measures"
+                        }
+                      },
+                      "Property": "Recovery (Assumed Stress)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "86a292298434be5a888e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_measures"
+                        }
+                      },
+                      "Property": "Net Benefit (Assumed Stress)"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_measures"
+                        }
+                      },
+                      "Property": "Booked Reserve (ADC)"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "3a50d9ebce147c47a2b5": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "e8d92ac4d5b800e09e51",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_measures"
+                        }
+                      },
+                      "Property": "Booked Reserve (ADC)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "be0ebcdc0d384c974e08",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_measures"
+                        }
+                      },
+                      "Property": "Attachment (ADC)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "40a2d3065709034124b0",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_measures"
+                        }
+                      },
+                      "Property": "Exhaustion (ADC)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "08a7fa82ee98c1cac653",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_measures"
+                        }
+                      },
+                      "Property": "Stressed Reserve (Assumed Stress)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "128278ce7403b3ca9e64",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fct_reinsurance_valuation"
+                        }
+                      },
+                      "Property": "booked_method"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "deneb7E15AEF80B9E4D4F8E12924291ECE89A",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_measures"
+                        }
+                      },
+                      "Property": "Booked Reserve (ADC)"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "90559b412ee70bc82640": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "41143e1431b0407dc076",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fct_reinsurance_valuation"
+                        }
+                      },
+                      "Property": "booked_method"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "tableEx",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fct_reinsurance_valuation"
+                        }
+                      },
+                      "Property": "booked_method"
+                    }
+                  }
+                }
+              ]
+            },
+            "highlight": {
+              "selection": [
+                {
+                  "dataMap": {
+                    "fct_reinsurance_valuation.booked_method": [
+                      {
+                        "scopeId": {
+                          "Comparison": {
+                            "ComparisonKind": 0,
+                            "Left": {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Entity": "fct_reinsurance_valuation"
+                                  }
+                                },
+                                "Property": "booked_method"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "'BornhuetterFerguson'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "metadata": []
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

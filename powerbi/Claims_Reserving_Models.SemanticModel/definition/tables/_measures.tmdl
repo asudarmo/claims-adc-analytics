@@ -126,109 +126,199 @@ table _measures
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Booked Reserve (ADC)' =
-			CALCULATE(
-			    SUM(fct_reinsurance_valuation[booked_reserve]),
-			    FILTER(fct_reinsurance_valuation, fct_reinsurance_valuation[scenario] = "Assumed stress"),
-			    FILTER(dim_reserving_run,
-			        'dim_reserving_run'[is_promoted] = TRUE
+			VAR EffectiveMethod =
+			    IF(
+			        HASONEVALUE(fct_reinsurance_valuation[booked_method]),
+			        SELECTEDVALUE(fct_reinsurance_valuation[booked_method]),
+			        "BornhuetterFerguson"
 			    )
-			)
+			RETURN
+			    CALCULATE(
+			        SUM(fct_reinsurance_valuation[booked_reserve]),
+			        FILTER(fct_reinsurance_valuation,
+			            fct_reinsurance_valuation[scenario] = "Assumed stress" &&
+			            fct_reinsurance_valuation[booked_method] = EffectiveMethod
+			        ),
+			        FILTER(dim_reserving_run,
+			            'dim_reserving_run'[is_promoted] = TRUE
+			        )
+			    )
 		lineageTag: c1b2c3d4-1111-4a2b-9c3d-4e5f60718295
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Attachment (ADC)' =
-			CALCULATE(
-			    SUM(fct_reinsurance_valuation[attachment]),
-			    FILTER(fct_reinsurance_valuation, fct_reinsurance_valuation[scenario] = "Assumed stress"),
-			    FILTER(dim_reserving_run,
-			        'dim_reserving_run'[is_promoted] = TRUE
+			VAR EffectiveMethod =
+			    IF(
+			        HASONEVALUE(fct_reinsurance_valuation[booked_method]),
+			        SELECTEDVALUE(fct_reinsurance_valuation[booked_method]),
+			        "BornhuetterFerguson"
 			    )
-			)
+			RETURN
+			    CALCULATE(
+			        SUM(fct_reinsurance_valuation[attachment]),
+			        FILTER(fct_reinsurance_valuation,
+			            fct_reinsurance_valuation[scenario] = "Assumed stress" &&
+			            fct_reinsurance_valuation[booked_method] = EffectiveMethod
+			        ),
+			        FILTER(dim_reserving_run,
+			            'dim_reserving_run'[is_promoted] = TRUE
+			        )
+			    )
 		lineageTag: c1b2c3d4-2222-4a2b-9c3d-4e5f60718295
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Exhaustion (ADC)' =
-			CALCULATE(
-			    SUM(fct_reinsurance_valuation[exhaustion]),
-			    FILTER(fct_reinsurance_valuation, fct_reinsurance_valuation[scenario] = "Assumed stress"),
-			    FILTER(dim_reserving_run,
-			        'dim_reserving_run'[is_promoted] = TRUE
+			VAR EffectiveMethod =
+			    IF(
+			        HASONEVALUE(fct_reinsurance_valuation[booked_method]),
+			        SELECTEDVALUE(fct_reinsurance_valuation[booked_method]),
+			        "BornhuetterFerguson"
 			    )
-			)
+			RETURN
+			    CALCULATE(
+			        SUM(fct_reinsurance_valuation[exhaustion]),
+			        FILTER(fct_reinsurance_valuation,
+			            fct_reinsurance_valuation[scenario] = "Assumed stress" &&
+			            fct_reinsurance_valuation[booked_method] = EffectiveMethod
+			        ),
+			        FILTER(dim_reserving_run,
+			            'dim_reserving_run'[is_promoted] = TRUE
+			        )
+			    )
 		lineageTag: c1b2c3d4-3333-4a2b-9c3d-4e5f60718295
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'ADC Limit' =
-			CALCULATE(
-			    SUM(fct_reinsurance_valuation[adc_limit]),
-			    FILTER(fct_reinsurance_valuation, fct_reinsurance_valuation[scenario] = "Assumed stress"),
-			    FILTER(dim_reserving_run,
-			        'dim_reserving_run'[is_promoted] = TRUE
+			VAR EffectiveMethod =
+			    IF(
+			        HASONEVALUE(fct_reinsurance_valuation[booked_method]),
+			        SELECTEDVALUE(fct_reinsurance_valuation[booked_method]),
+			        "BornhuetterFerguson"
 			    )
-			)
+			RETURN
+			    CALCULATE(
+			        SUM(fct_reinsurance_valuation[adc_limit]),
+			        FILTER(fct_reinsurance_valuation,
+			            fct_reinsurance_valuation[scenario] = "Assumed stress" &&
+			            fct_reinsurance_valuation[booked_method] = EffectiveMethod
+			        ),
+			        FILTER(dim_reserving_run,
+			            'dim_reserving_run'[is_promoted] = TRUE
+			        )
+			    )
 		lineageTag: c1b2c3d4-4444-4a2b-9c3d-4e5f60718295
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Premium (ADC)' =
-			CALCULATE(
-			    SUM(fct_reinsurance_valuation[premium]),
-			    FILTER(fct_reinsurance_valuation, fct_reinsurance_valuation[scenario] = "Assumed stress"),
-			    FILTER(dim_reserving_run,
-			        'dim_reserving_run'[is_promoted] = TRUE
+			VAR EffectiveMethod =
+			    IF(
+			        HASONEVALUE(fct_reinsurance_valuation[booked_method]),
+			        SELECTEDVALUE(fct_reinsurance_valuation[booked_method]),
+			        "BornhuetterFerguson"
 			    )
-			)
+			RETURN
+			    CALCULATE(
+			        SUM(fct_reinsurance_valuation[premium]),
+			        FILTER(fct_reinsurance_valuation,
+			            fct_reinsurance_valuation[scenario] = "Assumed stress" &&
+			            fct_reinsurance_valuation[booked_method] = EffectiveMethod
+			        ),
+			        FILTER(dim_reserving_run,
+			            'dim_reserving_run'[is_promoted] = TRUE
+			        )
+			    )
 		lineageTag: c1b2c3d4-5555-4a2b-9c3d-4e5f60718295
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Stressed Reserve (Assumed Stress)' =
-			CALCULATE(
-			    SUM(fct_reinsurance_valuation[stressed_reserve]),
-			    FILTER(fct_reinsurance_valuation, fct_reinsurance_valuation[scenario] = "Assumed stress"),
-			    FILTER(dim_reserving_run,
-			        'dim_reserving_run'[is_promoted] = TRUE
+			VAR EffectiveMethod =
+			    IF(
+			        HASONEVALUE(fct_reinsurance_valuation[booked_method]),
+			        SELECTEDVALUE(fct_reinsurance_valuation[booked_method]),
+			        "BornhuetterFerguson"
 			    )
-			)
+			RETURN
+			    CALCULATE(
+			        SUM(fct_reinsurance_valuation[stressed_reserve]),
+			        FILTER(fct_reinsurance_valuation,
+			            fct_reinsurance_valuation[scenario] = "Assumed stress" &&
+			            fct_reinsurance_valuation[booked_method] = EffectiveMethod
+			        ),
+			        FILTER(dim_reserving_run,
+			            'dim_reserving_run'[is_promoted] = TRUE
+			        )
+			    )
 		lineageTag: c1b2c3d4-6666-4a2b-9c3d-4e5f60718295
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Recovery (Assumed Stress)' =
-			CALCULATE(
-			    SUM(fct_reinsurance_valuation[recovery]),
-			    FILTER(fct_reinsurance_valuation, fct_reinsurance_valuation[scenario] = "Assumed stress"),
-			    FILTER(dim_reserving_run,
-			        'dim_reserving_run'[is_promoted] = TRUE
+			VAR EffectiveMethod =
+			    IF(
+			        HASONEVALUE(fct_reinsurance_valuation[booked_method]),
+			        SELECTEDVALUE(fct_reinsurance_valuation[booked_method]),
+			        "BornhuetterFerguson"
 			    )
-			)
+			RETURN
+			    CALCULATE(
+			        SUM(fct_reinsurance_valuation[recovery]),
+			        FILTER(fct_reinsurance_valuation,
+			            fct_reinsurance_valuation[scenario] = "Assumed stress" &&
+			            fct_reinsurance_valuation[booked_method] = EffectiveMethod
+			        ),
+			        FILTER(dim_reserving_run,
+			            'dim_reserving_run'[is_promoted] = TRUE
+			        )
+			    )
 		lineageTag: c1b2c3d4-7777-4a2b-9c3d-4e5f60718295
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Net Benefit (Assumed Stress)' =
-			CALCULATE(
-			    SUM(fct_reinsurance_valuation[net_benefit]),
-			    FILTER(fct_reinsurance_valuation, fct_reinsurance_valuation[scenario] = "Assumed stress"),
-			    FILTER(dim_reserving_run,
-			        'dim_reserving_run'[is_promoted] = TRUE
+			VAR EffectiveMethod =
+			    IF(
+			        HASONEVALUE(fct_reinsurance_valuation[booked_method]),
+			        SELECTEDVALUE(fct_reinsurance_valuation[booked_method]),
+			        "BornhuetterFerguson"
 			    )
-			)
+			RETURN
+			    CALCULATE(
+			        SUM(fct_reinsurance_valuation[net_benefit]),
+			        FILTER(fct_reinsurance_valuation,
+			            fct_reinsurance_valuation[scenario] = "Assumed stress" &&
+			            fct_reinsurance_valuation[booked_method] = EffectiveMethod
+			        ),
+			        FILTER(dim_reserving_run,
+			            'dim_reserving_run'[is_promoted] = TRUE
+			        )
+			    )
 		lineageTag: c1b2c3d4-8888-4a2b-9c3d-4e5f60718295
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Breakeven Inflation Rate' =
-			CALCULATE(
-			    SUM(fct_reinsurance_valuation[inflation_shock]),
-			    FILTER(fct_reinsurance_valuation, fct_reinsurance_valuation[scenario] = "Breakeven"),
-			    FILTER(dim_reserving_run,
-			        'dim_reserving_run'[is_promoted] = TRUE
+			VAR EffectiveMethod =
+			    IF(
+			        HASONEVALUE(fct_reinsurance_valuation[booked_method]),
+			        SELECTEDVALUE(fct_reinsurance_valuation[booked_method]),
+			        "BornhuetterFerguson"
 			    )
-			)
+			RETURN
+			    CALCULATE(
+			        SUM(fct_reinsurance_valuation[inflation_shock]),
+			        FILTER(fct_reinsurance_valuation,
+			            fct_reinsurance_valuation[scenario] = "Breakeven" &&
+			            fct_reinsurance_valuation[booked_method] = EffectiveMethod
+			        ),
+			        FILTER(dim_reserving_run,
+			            'dim_reserving_run'[is_promoted] = TRUE
+			        )
+			    )
 		lineageTag: c1b2c3d4-9999-4a2b-9c3d-4e5f60718295
 
 	measure 'Exception Count' = COUNTROWS(fct_data_quality_exceptions)
