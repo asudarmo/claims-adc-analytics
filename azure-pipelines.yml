@@ -1,0 +1,50 @@
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+resources:
+  containers:
+    - container: postgres
+      image: postgres:16
+      env:
+        POSTGRES_USER: reserving
+        POSTGRES_PASSWORD: reserving_dev_only
+        POSTGRES_DB: claims_reserving
+      ports:
+        - 5432:5432
+      volumes:
+        - $(Build.SourcesDirectory)/db/init:/docker-entrypoint-initdb.d
+      options: --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+
+resources.services:
+  postgres: postgres
+
+variables:
+  POSTGRES_HOST: localhost
+  POSTGRES_PORT: 5432
+  POSTGRES_USER: reserving
+  POSTGRES_PASSWORD: reserving_dev_only
+  POSTGRES_DB: claims_reserving
+
+steps:
+  - script: |
+      curl -LsSf https://astral.sh/uv/install.sh | sh
+      echo "##vso[task.prependpath]$HOME/.local/bin"
+    displayName: 'Install uv'
+
+  - script: uv sync
+    displayName: 'Install Python dependencies'
+
+  - script: uv run python scripts/load_raw_to_postgres.py
+    displayName: 'Load raw + ground truth CSVs into Postgres'
+
+  - script: uv run python scripts/gx_validate_raw.py
+    displayName: 'GX recall/precision report (raw layer, informational)'
+
+  - script: |
+      uv run dbt deps --profiles-dir .
+      uv run dbt build --profiles-dir .
+    displayName: 'dbt build (staging -> intermediate -> marts, plus tests)'
+    workingDirectory: dbt
