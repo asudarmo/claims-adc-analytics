@@ -11,8 +11,6 @@ resources:
         POSTGRES_DB: claims_reserving
       ports:
         - 5432:5432
-      volumes:
-        - $(Build.SourcesDirectory)/db/init:/docker-entrypoint-initdb.d
       options: --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
 
 variables:
@@ -29,6 +27,13 @@ jobs:
     services:
       postgres: postgres
     steps:
+      - script: |
+          for f in db/init/*.sql; do
+            echo "Applying $f"
+            PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -U $POSTGRES_USER -d $POSTGRES_DB -v ON_ERROR_STOP=1 -f "$f"
+          done
+        displayName: 'Apply db/init schema scripts'
+
       - script: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
           echo "##vso[task.prependpath]$HOME/.local/bin"
