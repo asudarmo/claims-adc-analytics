@@ -50,6 +50,16 @@ jobs:
 
       - script: |
           uv run dbt deps --profiles-dir .
-          uv run dbt build --profiles-dir .
+          uv run dbt build --profiles-dir . --exclude source:reserving_engine
         displayName: 'dbt build (staging -> intermediate -> marts, plus tests)'
         workingDirectory: dbt
+
+      - script: uv run python -m engine.main --label "CI bootstrap run"
+        displayName: 'Run the reserving engine (writes fct_reserve_results, fct_reinsurance_valuation)'
+
+      - script: uv run dbt test --profiles-dir . --select source:reserving_engine
+        displayName: 'Validate reserving-engine output tables (structural tests)'
+        workingDirectory: dbt
+
+      - script: uv run pytest
+        displayName: 'Run engine unit tests'
