@@ -28,22 +28,48 @@ uv run python scripts/gx_validate_raw.py
 # 4. Build the warehouse layer (staging -> intermediate -> marts)
 cd dbt
 DBT_PROFILES_DIR=. uv run --project .. dbt deps    # once, or after changing packages.yml
-DBT_PROFILES_DIR=. uv run --project .. dbt build   # seeds + models + tests
+DBT_PROFILES_DIR=. uv run --project .. dbt build --exclude source:reserving_engine
 cd ..
 
 # 5. Run the reserving engine (reads fct_triangle_cell, writes fct_reserve_results
 #    and fct_reinsurance_valuation back to Postgres)
 uv run python -m engine.main
 
-# 6. Run the engine's test suite
+# 6. Validate the reserving engine's output tables (uniqueness, not-null,
+#    at-most-one-promoted-run) now that they actually exist
+cd dbt
+DBT_PROFILES_DIR=. uv run --project .. dbt test --select source:reserving_engine
+cd ..
+
+# 7. Run the engine's test suite
 uv run pytest
 ```
 
-A clean run of step 4 should end with every seed, model and test passing.
-That's the actual correctness signal for this layer, not something to eyeball.
-Step 6 should end with every test passing, including the invariant that a
-tail factor of 1.0 and an inflation shock of 0 reproduce the base scenario
-exactly (see [docs/reserving-engine.md](reserving-engine.md)).
+The `--exclude source:reserving_engine` on step 4 is required on a genuinely
+fresh database, not optional. `fct_reserve_results`,
+`fct_reinsurance_valuation`, `dim_reserving_run`, and
+`fct_reserving_run_parameters` are Python-owned tables (see
+[reserving-engine.md](reserving-engine.md)), only `engine/main.py` ever
+creates them, dbt only declares them as a source for structural testing
+and never builds them itself. Before the engine has run at least once,
+those tables simply don't exist, so testing them fails with "relation does
+not exist", a dependency-ordering issue, not a real data problem. Step 6
+is what actually validates them, once the engine has populated them.
+
+This was found, not designed, the Azure Pipelines CI setup
+(`azure-pipelines.yml`) ran this sequence against a brand-new database for
+the first time and hit exactly this failure. This project's own local dev
+database had accumulated engine output over months of iteration, so a
+plain `dbt build` before ever running the engine looked like it would
+pass cleanly, it was never actually exercised against a truly fresh
+database until CI did.
+
+A clean run of step 4 should end with every seed, model and test passing
+(aside from the excluded source tests). Step 6 should end with every
+reserving-engine structural test passing. Step 7 should end with every
+test passing, including the invariant that a tail factor of 1.0 and an
+inflation shock of 0 reproduce the base scenario exactly (see
+[docs/reserving-engine.md](reserving-engine.md)).
 
 ## Sanity checks
 
@@ -81,7 +107,9 @@ file):
 ```bash
 docker compose down -v     # drops the Postgres volume, all loaded data goes with it
 docker compose up -d
-# then repeat steps 1-4 above
+# then repeat steps 1-6 above (a dropped volume is exactly the "genuinely
+# fresh database" case step 4's note above is about, the engine needs to
+# run again before the reserving-engine source tests will pass)
 ```
 
 ## Project layout
@@ -96,4 +124,5 @@ powerbi/             the .pbip project (semantic model + report), see docs/dashb
 data/                generated CSVs (raw_extract/, ground_truth/) + their data dictionary
 docs/                this documentation
 prototype/           the original spreadsheet-based model this project continues from
+azure-pipelines.yml  CI: runs steps 1-7 above against a fresh Postgres container on every push to main
 ```
