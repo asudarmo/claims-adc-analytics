@@ -18,5 +18,6 @@ dbt/.user.yml
 **/.pbi/editorSettings.json
 **/DAXQueries/
 
+private/
 Notes.md
 PLAN.md
